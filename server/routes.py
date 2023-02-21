@@ -112,6 +112,7 @@ def my_project():
     """
     return render_template('my_project.html')
 
+
 @app.route('/my_application')
 def my_application():
     """
@@ -154,7 +155,7 @@ def account():
     todo
     """
     image_file = url_for('static', filename='images/' + 'steven.jpg')
-    return render_template('account.html', title='Account', image_file = image_file)
+    return render_template('account.html', title='Account', image_file=image_file)
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])

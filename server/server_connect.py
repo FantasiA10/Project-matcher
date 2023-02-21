@@ -91,7 +91,7 @@ def add_project(details):
     """
     send project to server
     """
-    response = requests.post(URL+PROJECT_ADD, JSON_TYPE=details)
+    response = requests.post(URL+PROJECT_ADD, json=details)
     if response.status_code == 200:
         return {MESSAGE: 'Project added.'}
     else:
