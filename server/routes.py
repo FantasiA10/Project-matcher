@@ -153,9 +153,8 @@ def account():
     """
     todo
     """
-    image_file = url_for('../static/images/' + 'steven.jpg')
-    return render_template('account.html', title='Account',
-                           image_file=image_file)
+    image_file = url_for('static', filename='images/' + 'steven.jpg')
+    return render_template('account.html', title='Account', image_file = image_file)
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])
