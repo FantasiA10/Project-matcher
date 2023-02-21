@@ -18,7 +18,6 @@ FIELD = 'field'
 LIST = 'list'
 DICT = 'dict'
 DATA = "Data"
-HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
 ADD = 'add'
@@ -29,8 +28,7 @@ PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
-USERS_NS = 'users'
-SPONSORS_NS = 'sponsors'
+
 
 JASON_TYPE = 'json'
 STR_TYPE = 'str'
