@@ -42,7 +42,7 @@ PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
 
 def get_project_details(project):
-    response = requests.post(URL+PROJECT_DETAILS+f'/{project}')
+    response = requests.get(URL+PROJECT_DETAILS+f'/{project}')
     if response.status_code == 200:
         return response.json()['project detail']
     else:
@@ -61,31 +61,37 @@ def del_project(name):
     """
     Delete a doc from db collection by its name.
     """
-    return dbc.del_one(PROJECTS_COLLECT, {PROJECT_KEY: name})
+    
 
 
 def del_one(name):
-    del projects[name]
+    """
+    todo
+    """
 
 
 def exist(name):
-    return name in projects
+    """
+    todo
+    """
 
 
-def check_if_exist(name):
+def check_if_exist(project):
     """
     check whether or not a project exists.
     """
-    response = requests.post(URL+PROJECT_DETAILS+f'/{name}')
+    response = requests.get(URL+PROJECT_DETAILS+f'/{project}')
     if response.status_code == 200:
-        return {MESSAGE: 'Project added.'}
+        return response.json()['project detail']
     else:
         print(f"Request failed with status code {response.status_code}")
-    return get_project_details(name) is not None
 
 
 def add_project(details):
-    response = requests.post(URL+PROJECT_ADD, JSON_TYPE = details)
+    """
+    send project to server
+    """
+    response = requests.post(URL+PROJECT_ADD, JSON_TYPE=details)
     if response.status_code == 200:
         return {MESSAGE: 'Project added.'}
     else:
@@ -93,10 +99,6 @@ def add_project(details):
 
 
 def change_project_single_field(name, field, val):
-    if not isinstance(name, str):
-        raise TypeError(f'Wrong type for name: {type(name)=}')
-
-    if not isinstance(field, str):
-        raise TypeError(f'Wrong type for details: {type(field)=}')
-    dbc.connect_db()
-    return dbc.change_one(NAME, name, APPROVE, val, PROJECTS_COLLECT)
+    """
+    todo
+    """

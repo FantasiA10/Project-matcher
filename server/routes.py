@@ -3,7 +3,6 @@ from flask import Flask, url_for, render_template, session, request, redirect, s
 from flask_restx import Resource
 import datetime
 from user_login import User
-import db.projects as pj
 import server.server_connect as sc
 import server.module as module
 
@@ -88,7 +87,7 @@ def add_project():
       "if_approve": True
       #todo need request("FS")
     }
-    if pj.check_if_exist(request.form['name']):
+    if sc.check_if_exist(request.form['name']):
         flash("Error: Project name already existed.")
         return render_template('add_project.html')
     else:
