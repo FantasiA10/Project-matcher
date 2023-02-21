@@ -1,6 +1,6 @@
 import heapq
 import datetime
-import db.projects as pj
+import server.server_connect as sc
 from functools import wraps
 import difflib
 from flask import session, redirect
@@ -12,7 +12,7 @@ def homepage_form(key_word=None):
     """
     Return project list
     """
-    temp_project_dict = pj.get_projects_dict()
+    temp_project_dict = sc.get_projects_dict()
     project_lst = []
     project_dict = {}
     for key in temp_project_dict:

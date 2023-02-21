@@ -1,5 +1,6 @@
 import pymongo
 import db.projects as pj
+import server.server_connect as sc
 import requests
 import datetime
 import db.db_connect as connect
@@ -29,7 +30,21 @@ def curr_data():
         print(doc)
     print(pj.get_projects_dict())
 
-connect.connect_db()
-print(connect.change_one("name", "Test Project", "if_approve", False, "projects"))
+details = {
+  "account": "string",
+  "name": "string",
+  "department_name": "string",
+  "major_requirements": "string",
+  "school_year": "string",
+  "num_members": 0,
+  "GPA": 0,
+  "project_duration": "string",
+  "skill requirements": "string",
+  "description": "string",
+  "post_date": "string",
+  "if_approve": True
+}
+response = requests.post("https://project-finder.herokuapp.com/projects/add", json = details)
+print(response.status_code)
 #data = requests.get("https://project-finder.herokuapp.com/projects/dict")
 #print(data.json())

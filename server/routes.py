@@ -4,6 +4,7 @@ from flask_restx import Resource
 import datetime
 from user_login import User
 import db.projects as pj
+import server.server_connect as sc
 import server.module as module
 
 
@@ -72,7 +73,6 @@ def add_project():
     """
     if request.method == 'GET':
         return render_template('add_project.html')
-    proj_name = request.form['name']
     project_details = {
       'name': request.form['name'],
       'account': session['user'],
@@ -92,7 +92,7 @@ def add_project():
         flash("Error: Project name already existed.")
         return render_template('add_project.html')
     else:
-        pj.add_project(proj_name, project_details)
+        sc.add_project(project_details)
         flash("Thank you for sharing your project with us.")
         return render_template('my_project.html')
 
@@ -102,8 +102,9 @@ def single_post(project):
     """
     todo
     """
-    project = pj.get_project_details(project)
+    project = sc.get_project_details(project)
     return render_template('post.html', project=project)
+
 
 @app.route('/my_project')
 def my_project():
@@ -130,12 +131,21 @@ def homepage_search():
     return render_template('homepage.html', project_lst=project_lst)
 
 
-@app.route('/images/<file_name>', methods=['GET'])
+@app.route('/static/images/<file_name>', methods=['GET'])
 def get_file(file_name):
     """
     todo
     """
-    file_name = os.path.join("templates/images",file_name)
+    file_name = os.path.join("../static/images", file_name)
+    return send_file(file_name)
+
+
+@app.route('/static/<css_file>', methods=['GET'])
+def get_css_file(css_file):
+    """
+    todo
+    """
+    file_name = os.path.join("../static", css_file)
     return send_file(file_name)
 
 
@@ -144,7 +154,7 @@ def account():
     """
     todo
     """
-    image_file = url_for('static', filename='images/' + 'steven.jpg')
+    image_file = url_for('../static/images/' + 'steven.jpg')
     return render_template('account.html', title='Account',
                            image_file=image_file)
 
