@@ -1,5 +1,14 @@
 import requests
 
+LIST = 'list'
+DICT = 'dict'
+DATA = "Data"
+MESSAGE = 'message'
+DETAILS = 'details'
+ADD = 'add'
+CHANGE = 'change'
+DELETE = 'delete'
+
 TEST_PROJECT_NAME = 'Test project'
 NAME = 'name'
 ACCOUNT = 'account'
@@ -15,29 +24,69 @@ DESCRIP = 'description'
 APPROVE = "if_approve"
 FIELD = 'field'
 
-LIST = 'list'
-DICT = 'dict'
-DATA = "Data"
-MESSAGE = 'message'
-DETAILS = 'details'
-ADD = 'add'
-CHANGE = 'change'
-DELETE = 'delete'
+DATA_NS = 'data'
+PROJECTS_NS = 'projects'
+USERS_NS = 'users'
+
+URL = "https://project-finder.herokuapp.com/"
 
 PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'
-DATA_NS = 'data'
-PROJECTS_NS = 'projects'
-
-
-JASON_TYPE = 'json'
-STR_TYPE = 'str'
-
-URL = "https://project-finder.herokuapp.com/"
 PROJECT_DICT = f'/{PROJECTS_NS}/{DICT}'
 PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
+
+USER_DICT = f'/{DICT}'
+USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
+USER_LIST = f'/{USERS_NS}/{LIST}'
+USER_ADD = f'/{USERS_NS}/{ADD}'
+USER_LOGIN = f'/{USERS_NS}/login'
+USER_SIGNUP = f'/{USERS_NS}/signup'
+
+
+def user_exists(users):
+    response = requests.get(URL+USER_DETAILS+f'/{users}')
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def add_user(details):
+    """
+    send user to server
+    """
+    response = requests.post(URL+USER_ADD, json=details)
+    if response.status_code == 200:
+        return {MESSAGE: 'User added.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def get_user_details(user):
+    response = requests.get(URL+USER_DETAILS+f'/{user}')
+    if response.status_code == 200:
+        return response.json()['user detail']
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def user_login(details):
+    response = requests.post(URL+USER_LOGIN, json=details)
+    if response.status_code == 200:
+        return {MESSAGE: 'User loged in.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def user_signup(details):
+    response = requests.post(URL+USER_LOGIN, json=details)
+    if response.status_code == 200:
+        return {MESSAGE: 'User created.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
 
 def get_project_details(project):
     response = requests.get(URL+PROJECT_DETAILS+f'/{project}')
@@ -45,6 +94,7 @@ def get_project_details(project):
         return response.json()['project detail']
     else:
         print(f"Request failed with status code {response.status_code}")
+
 
 def get_projects_dict():
     response = requests.get(URL+PROJECT_DICT)
