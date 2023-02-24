@@ -182,6 +182,22 @@ def contact_us():
     return render_template("contact.html")
 
 
+@app.route('/service', methods=['GET'])
+def service():
+    """
+    Todo
+    """
+    return render_template("service.html")
+
+
+@app.route('/team', methods=['GET'])
+def team():
+    """
+    Todo
+    """
+    return render_template("team.html")
+
+
 @app.route('/upload')
 def upload_image():
     """
