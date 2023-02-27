@@ -1,5 +1,4 @@
 API_DIR = server
-DB_DIR = db
 REQ_DIR = .
 
 FORCE:
@@ -11,7 +10,6 @@ github: FORCE
 	git push origin master
 
 all_tests: FORCE
-	cd $(DB_DIR); make tests
 	cd $(API_DIR); make tests
 
 dev_env: FORCE
@@ -21,4 +19,3 @@ dev_env: FORCE
 
 docs: FORCE
 	cd $(API_DIR); make docs
-	cd $(DB_DIR); make docs
