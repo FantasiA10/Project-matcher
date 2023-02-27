@@ -21,8 +21,9 @@ def homepage_form(key_word=None):
         if temp_project_dict[key]['if_approve']:
             project_lst.append(temp_project_dict[key])
             project_dict[key] = temp_project_dict[key]
-        if not key_word or not temp_project_dict:
-            return project_lst
+    
+    if not key_word or not temp_project_dict:
+        return project_lst
     return rank_for_relation_to_key_work(project_dict, key_word.lower())
 
 
