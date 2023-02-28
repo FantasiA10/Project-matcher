@@ -38,7 +38,7 @@
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
               <form class="input-group" method = "POST" action = "/homepage_search">
-                  <input type="search" name="key_word" placeholder="Search Id/Name/Owner/Profession..." onkeyup="if (event.key === 'Enter') { this.form.submit(); }">
+                  <input type="search" name="key_word" placeholder="Search" onkeyup="if (event.key === 'Enter') { this.form.submit(); }">
                   <img src="static/images/search.png" alt="">
               </form>
           </section>
@@ -69,7 +69,7 @@
                             <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
                             <td> {{project_lst[i].department_name}} </td>
                             <td>
-                            <p class="status delivered">Available</p>
+                            <p class="status delivered">OPEN</p>
                             </td>
                             <td> <strong>{{project_lst[i].post_date}}</strong></td>
 
@@ -83,8 +83,6 @@
                                         <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
                                         View Details &nbsp; &#10140;</a>
                                     </label>
-
-                                    <label for="export-file" id="toJSON">Download &nbsp; &#10140;</label>
 
                                     <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
                             </div>

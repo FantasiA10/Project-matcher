@@ -44,7 +44,7 @@ main.table {
 .table__header .input-group {
     width: 35%;
     height: 100%;
-    background-color: rgba(147, 137, 137, 0.333);
+    background-color: #efefef;
     padding: 0 .8rem;
     border-radius: 2rem;
 
@@ -114,23 +114,31 @@ td img {
     vertical-align: middle;
 }
 
-table, th, td {
+table, td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
+}
+
+th {
+    color: #fff;
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+    font-size: 17px;
 }
 
 thead th {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #d5d1defe;
+    background-color: #57068c;;
     cursor: pointer;
     text-transform: capitalize;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #0000000b;
+    background-color: #f5f4f4;
 }
 
 tbody tr {
@@ -144,7 +152,7 @@ tbody tr.hide {
 }
 
 tbody tr:hover {
-    background-color: #fff6 !important;
+    background-color:#f0f0f0;
 }
 
 tbody tr td,
@@ -167,14 +175,15 @@ tbody tr.hide td img {
 }
 
 .status {
-    padding: .4rem 0;
-    border-radius: 2rem;
+    padding: .3rem, 0;
+    border-radius: 1rem;
     text-align: center;
 }
 
 .status.delivered {
-    background-color: #86e49d;
+    background-color: #88f5a3;
     color: #006b21;
+    font-size: 15px;
 }
 
 .status.cancelled {
