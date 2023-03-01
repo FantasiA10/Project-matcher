@@ -25,7 +25,6 @@
                     <br>
                     <div class="square-window">A research project matcher connects college students with projects that match their interests and skills</div>
                     <br>
-                    <h3><a href="/about_us" class="btn btn--secondary" style=" background-color:#57068c;">About Us</a></h3>
                 </div>
             </header>
         </div>
@@ -66,7 +65,7 @@
                             <td> <img src="static/images/steven.jpg" alt=""> {{wait_project_lst[i].account.name}} </td>
                             <td> {{wait_project_lst[i].department_name}} </td>
                             <td>
-                            <p class="status delivered">OPEN</p>
+                              <p class="status delivered"> <a href="{{url_for('approve_project', project = wait_project_lst[i].name)}}">APPORVE</a></p>
                             </td>
                             <td> <strong>{{wait_project_lst[i].post_date}}</strong></td>
 
@@ -116,22 +115,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                      {% for i in range(project_lst |length)%}
+                      {% for j in range(project_lst |length)%}
                       <tr>
-                          <td> {{i}} </td>
+                          <td> {{j}} </td>
 
                           <td><strong>
-                          <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
-                              {{project_lst[i].name}}</a>
+                          <a href="{{url_for('single_post', project = project_lst[j].name)}}" style="color:#57068c;">
+                              {{project_lst[j].name}}</a>
                           </strong></td>
                           
 
-                          <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
-                          <td> {{project_lst[i].department_name}} </td>
+                          <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[j].account.name}} </td>
+                          <td> {{project_lst[j].department_name}} </td>
                           <td>
-                          <p class="status delivered">OPEN</p>
+                          <p class="status delivered"> <a href="{{url_for('disapprove_project', project = project_lst[j].name)}}">DISAPPORVE</a></p>
                           </td>
-                          <td> <strong>{{project_lst[i].post_date}}</strong></td>
+                          <td> <strong>{{project_lst[j].post_date}}</strong></td>
 
 
                           <td> 
@@ -140,7 +139,7 @@
                               <input type="checkbox" id="export-file" x>
                               <div class="export__file-options">
                                   <label for="export-file" id="toPDF" >
-                                      <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
+                                      <a href="{{url_for('single_post', project = project_lst[j].name)}}" style="text-decoration: none;">
                                       View Details &nbsp; &#10140;</a>
                                   </label>
 

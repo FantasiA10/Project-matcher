@@ -8,6 +8,7 @@ DETAILS = 'details'
 ADD = 'add'
 CHANGE = 'change'
 DELETE = 'delete'
+VALUE = 'value'
 
 TEST_PROJECT_NAME = 'Test project'
 NAME = 'name'
@@ -36,6 +37,7 @@ PROJECT_DICT = f'/{PROJECTS_NS}/{DICT}'
 PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
+PROJECT_CHANGE = f'/{PROJECTS_NS}/{CHANGE}'
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -150,3 +152,12 @@ def change_project_single_field(name, field, val):
     """
     todo
     """
+    request_dict = {NAME: name,
+                    FIELD: field,
+                    VALUE: val
+                    }
+    response = requests.post(URL+PROJECT_CHANGE, json=request_dict)
+    if response.status_code == 200:
+        return {MESSAGE: 'Project Changed.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")

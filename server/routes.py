@@ -165,10 +165,29 @@ def manager_homepage():
     """
     wait_approve_project_lst = module.homepage_form(approve=False)
     approve_project_lst = module.homepage_form()
-    print(approve_project_lst)
     return render_template('manager_homepage.html',
                            wait_project_lst=wait_approve_project_lst,
                            project_lst=approve_project_lst)
+
+
+@app.route("/approve_project/<project>", methods=['GET', 'POST'])
+def approve_project(project):
+    """
+    approve a project and reload manager_home
+    """
+    print(project)
+    sc.change_project_single_field(project, sc.APPROVE, True)
+    return redirect("/manager_homepage")
+
+
+@app.route("/disapprove_project/<project>", methods=['GET', 'POST'])
+def disapprove_project(project):
+    """
+    approve a project and reload manager_home
+    """
+    print(project)
+    sc.change_project_single_field(project, sc.APPROVE, False)
+    return redirect("/manager_homepage")
 
 
 @app.route('/about_us', methods=['GET'])
