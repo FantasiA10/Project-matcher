@@ -8,7 +8,7 @@ from flask import session, redirect
 
 #export data from database
 #todo give top matches
-def homepage_form(key_word=None):
+def homepage_form(key_word=None, approve=True):
     """
     Return project list
     """
@@ -18,9 +18,14 @@ def homepage_form(key_word=None):
     for key in temp_project_dict:
     #todo add time limit functions like (datetime.datetime.today() 
     # - temp_project_dict[key]['post_date']).days < 90
-        if temp_project_dict[key]['if_approve']:
-            project_lst.append(temp_project_dict[key])
-            project_dict[key] = temp_project_dict[key]
+        if approve:
+            if temp_project_dict[key]['if_approve']:
+                project_lst.append(temp_project_dict[key])
+                project_dict[key] = temp_project_dict[key]
+        else:
+            if not temp_project_dict[key]['if_approve']:
+                project_lst.append(temp_project_dict[key])
+                project_dict[key] = temp_project_dict[key]
     
     if not key_word or not temp_project_dict:
         return project_lst

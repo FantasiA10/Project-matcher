@@ -51,7 +51,7 @@ def homepage():
     Return homepage with list of projects
     """
     if session["user"]['email'].split('_')[0] == "Manager":
-        return render_template('manager_homepage.html')
+        return redirect('/manager_homepage')
     project_lst = module.homepage_form()
     return render_template('homepage.html', project_lst=project_lst)
 
@@ -163,7 +163,12 @@ def manager_homepage():
     """
     todo
     """
-    return render_template("manager_homepage.html")
+    wait_approve_project_lst = module.homepage_form(approve=False)
+    approve_project_lst = module.homepage_form()
+    print(approve_project_lst)
+    return render_template('manager_homepage.html',
+                           wait_project_lst=wait_approve_project_lst,
+                           project_lst=approve_project_lst)
 
 
 @app.route('/about_us', methods=['GET'])
