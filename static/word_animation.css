@@ -1,0 +1,57 @@
+span{
+    position: relative;
+    top: 2rem;
+    display: inline-block;
+    overflow: hidden;
+    animation: .3s swift-up ease-out forwards;
+}
+
+i{  
+    position:relative;
+    font-style: normal;
+    top: 2.5rem;
+    animation:.3s swift-up ease-out forwards;
+}
+
+p1{
+    position: relative;
+    top: 2rem;
+    opacity:1;
+    animation: .3s swift-up ease-out forwards,
+    .3s fade-in ease-out forwards;
+}
+
+@keyframes fade-in{
+    to{
+        opacity:1;
+    }
+}
+@keyframes swift-up{
+    to {
+        top: 0;
+    }
+}
+
+span:nth-of-type(1) i{
+    animation-delay: 0;
+}
+
+span:nth-of-type(2) i{
+    animation-delay: 0.2s;
+}
+
+span:nth-of-type(3) i{
+    animation-delay: 0.4s;
+}
+
+span:nth-of-type(4) i{
+    animation-delay: 0.6s;
+}
+
+span:nth-of-type(5) i{
+    animation-delay: 0.8s;
+}
+
+span:nth-of-type(6) i{
+    animation-delay: 1s;
+}

@@ -180,7 +180,7 @@ body {
 
 
   header {
-    background-image: url("/static/images/homepage_background.png");
+    background-image: url("/static/images/homepage_background1.png");
     background-size: cover;
     height: 600px;
     position: relative;
@@ -202,7 +202,7 @@ body {
   
   h3 {
     font-size: 2em;
-    line-height: 1.1;
+    line-height: 1.35;
     color: white;
     margin: 0;
     text-align: left;
