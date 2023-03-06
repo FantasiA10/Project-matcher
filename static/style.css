@@ -181,10 +181,12 @@ body {
 
   header {
     background-image: url("/static/images/homepage_background1.png");
-    background-size:100%;
-    height: 600px;
+    background-size:120%;
+    height: 750px;
     position: relative;
     background-attachment: fixed;
+    background-position: top center;
+    background-repeat: no-repeat;
   }
   
   .header-container {

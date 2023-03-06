@@ -17,7 +17,7 @@ p1{
     position: relative;
     top: 2rem;
     opacity:1;
-    animation: .3s swift-up ease-out forwards,
+    animation: .9s swift-up ease-out forwards,
     .3s fade-in ease-out forwards;
 }
 
