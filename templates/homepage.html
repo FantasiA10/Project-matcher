@@ -39,8 +39,8 @@
                 </div>
             </header>
         </div>
-    </br>
-    </br>
+        </br>
+        </br>
       <main class="table">
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
@@ -101,6 +101,12 @@
               </table>
           </section>
       </main>
+      <script type="text/javascript">
+        const bg = document.getElementByTagName("header");
+        window.addEventListener('scroll', function(){
+            bg.style.backgroundSize = 120 - window.pageYOffset/12+'%';
+        });
+      </script>
   </body>
   <br>
   <br>
