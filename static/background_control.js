@@ -27,3 +27,17 @@ window.addEventListener('scroll', () => {
   const backgroundTop = scrollPosition;
   aboutUsBackground.style.top = scrollPosition/3 +"px";
 });
+
+const tableOpacity = document.querySelectorAll('table-opacity');
+
+const tableObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+    }
+  });
+});
+
+tableOpacity.forEach(element => {
+  tableObserver.observe(element);
+});
