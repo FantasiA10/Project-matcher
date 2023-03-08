@@ -3,22 +3,45 @@ span{
     top: 2rem;
     display: inline-block;
     overflow: hidden;
-    animation: .3s swift-up ease-out forwards;
+    animation: 2s swift-up ease-out forwards;
 }
 
 i{  
     position:relative;
     font-style: normal;
-    top: 2.5rem;
-    animation:.3s swift-up ease-out forwards;
+    top: 5.5rem;
+    animation:2s swift-up ease-out forwards;
 }
 
 p1{
     position: relative;
     top: 2rem;
-    opacity:1;
-    animation: .9s swift-up ease-out forwards,
-    .3s fade-in ease-out forwards;
+    opacity:0;
+    color: Black;
+    animation: 2s swift-up ease-out forwards,
+    4s fade-in ease-out forwards;
+}
+
+h5 {
+    font-size: 3.5em;
+    line-height: 1.3;
+    font: 'Open Sans', sans-serif;
+    color: Black;
+    opacity:0;
+    margin: 0;
+    text-align: left;
+    animation: 4s fade-in ease-out forwards;
+  }
+
+icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    margin:10px auto;
+    width: 80%;
+    opacity:0;
+    transition: opacity 4s ease-in-out;
 }
 
 @keyframes fade-in{
@@ -55,4 +78,3 @@ span:nth-of-type(5) i{
 span:nth-of-type(6) i{
     animation-delay: 1s;
 }
-

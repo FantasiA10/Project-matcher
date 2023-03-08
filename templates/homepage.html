@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/word_animation.css">
         <title>Home</title>
-            <div id="header">
+            <div id="transparentheader">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
                 <a href="{{url_for('my_application') }}" class="btn">Applications</a>
                 <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
@@ -21,18 +21,18 @@
                 <a href="{{url_for('login')}}" class="round-button">login</a>
             </div>
     </head>
-    <body>  
+    <body>
         <div>
             <header>
                 <div class="header-container">
-                    <h3>
+                    <h5>
                         <span><i>Discover </i></span>
-                        <span><i>Project </i></span>
+                        <span><i>Projects </i></span>
                         <span><i>Align </i></span>
                         <span><i>with </i></span>
-                        <span><i>your </i></span>
+                        <span><i>Your </i></span>
                         <span><i>Interests </i></span>
-                      </h3>
+                      </h5>
                         <br>
                         <div class="square-window"><p1>A research project matcher connects college students with projects that match their interests and skills<p1></div>
                         <br>
@@ -40,6 +40,24 @@
                 </div>
             </header>
         </div>
+        <div class="sub-header-container"><br><h1>What We Have Achieve</h1></div>
+        <div class="static-container">
+            <div></div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon.png"></icon>
+                <br><h1>x User</h1>
+            </div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon.png"></icon>
+                <br><h1>y Projects</h1>
+            </div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon.png"></icon>
+                <br><h1>z Applications</h1>
+            </div>
+            <div></div>
+        </div>
+
         </br>
         </br>
       <main class="table">
@@ -95,7 +113,6 @@
                                     <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
                             </div>
                             </td>
-
                         {%endfor%}
                         </tr>
                   </tbody>
