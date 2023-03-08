@@ -19,3 +19,11 @@ const observer = new IntersectionObserver(entries => {
 elements.forEach(element => {
   observer.observe(element);
 });
+
+const aboutUsBackground = document.querySelector('about-background-container');
+
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+  const backgroundTop = scrollPosition;
+  aboutUsBackground.style.top = scrollPosition/3 +"px";
+});

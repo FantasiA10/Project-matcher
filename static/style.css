@@ -50,9 +50,6 @@ h1 {
 }
 
 body {
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 28px;
   color: var(--black);
 }
 
@@ -141,12 +138,6 @@ body {
   background-color: #f8f8f8;
   padding: 40px 0;
   text-align: center;
-  }
-  
-  #aboutus h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #1e2d5d;
   }
   
   #aboutus p {
@@ -295,6 +286,7 @@ body {
   grid-template-columns: repeat(5, 1fr);
 }
 
+
 .sub-header-container {
   background: white;
   height: 100px;
@@ -306,3 +298,42 @@ body {
 }
 
 
+.about-container {
+  background: white;
+  height: 800px;
+  position: relative;
+  background-attachment: fixed;
+  background-position: top center;
+  background-repeat: no-repeat;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.about-text-container {
+  background: white;
+  height: 800px;
+  position: relative;
+  top:5%;
+  left:15%;
+  width:70%;
+  right:15%;
+  text-align: left;
+  line-height: 200%;
+}
+
+about-background-container {
+  background: url("/static/images/about_us_background.png");
+  position: relative;
+  background-size:50%;
+  height:100%;
+  width:100%;
+  background-attachment: fixed;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+#about-text-container h2 {
+  font-size: 100px;
+  margin-bottom: 50px;
+  color: #1e2d5d;
+  }
