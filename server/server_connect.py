@@ -83,7 +83,7 @@ def user_login(details):
 
 
 def user_signup(details):
-    response = requests.post(URL+USER_LOGIN, json=details)
+    response = requests.post(URL+USER_SIGNUP, json=details)
     if response.status_code == 200:
         return {MESSAGE: 'User created.'}
     else:
