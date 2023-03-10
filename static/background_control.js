@@ -41,3 +41,17 @@ const tableObserver = new IntersectionObserver(entries => {
 tableOpacity.forEach(element => {
   tableObserver.observe(element);
 });
+
+const displayArea = document.querySelectorAll("display-area");
+
+displayArea.forEach(function(displayArea){
+  displayArea.addEventListener("mouseover", () => {
+    displayArea.firstChild.style.opacity = 1;
+  });
+  displayArea.addEventListener("mouseout", () => {
+    displayArea.firstChild.style.opacity = 0;
+  });
+  displayArea.addEventListener("click", () => {
+    
+  });
+});

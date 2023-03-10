@@ -337,3 +337,15 @@ about-background-container {
   margin-bottom: 50px;
   color: #1e2d5d;
   }
+
+.homepage-jump-container {
+    background: rgb(4, 2, 36);
+    height: 850px;
+    position: relative;
+    background-attachment: fixed;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
