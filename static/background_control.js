@@ -42,16 +42,19 @@ tableOpacity.forEach(element => {
   tableObserver.observe(element);
 });
 
-const displayArea = document.querySelectorAll("display-area");
-
+const displayArea = document.querySelectorAll(".margin-left-bot-container");
+const firstDisplayArea = displayArea.item(0)
 displayArea.forEach(function(displayArea){
   displayArea.addEventListener("mouseover", () => {
-    displayArea.firstChild.style.opacity = 1;
+    displayArea.lastElementChild.style.opacity = 1;
   });
   displayArea.addEventListener("mouseout", () => {
-    displayArea.firstChild.style.opacity = 0;
+    displayArea.lastElementChild.style.opacity = 0;
   });
   displayArea.addEventListener("click", () => {
-    
+    if(displayArea==firstDisplayArea){
+      window.location.href = "add_project";}
+    else{
+      window.location.href = "my_application";};
   });
 });
