@@ -115,15 +115,12 @@ def single_post(project):
                            filename=filename)
 
 
-@app.route('/download/<project>', methods=['POST'])
+@app.route('/download/<project>', methods=['GET', 'POST'])
 def download(project):
     """
     download description file
     """
-    project = sc.get_project_details(project)
-    sc.get_file(project)
-    return render_template('post.html', project=project)
-
+    return sc.get_file(project)
 
 @app.route('/my_project')
 def my_project():
@@ -195,7 +192,6 @@ def approve_project(project):
     """
     approve a project and reload manager_home
     """
-    print(project)
     sc.change_project_single_field(project, sc.APPROVE, True)
     return redirect("/manager_homepage")
 
@@ -205,7 +201,6 @@ def disapprove_project(project):
     """
     approve a project and reload manager_home
     """
-    print(project)
     sc.change_project_single_field(project, sc.APPROVE, False)
     return redirect("/manager_homepage")
 

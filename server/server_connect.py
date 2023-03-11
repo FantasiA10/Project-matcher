@@ -1,5 +1,6 @@
 import requests
 from flask import send_file
+import mimetypes
 
 LIST = 'list'
 DICT = 'dict'
@@ -27,6 +28,7 @@ APPROVE = "if_approve"
 FIELD = 'field'
 FILE = 'file'
 DELETE = 'delete'
+GET = 'get'
 
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
@@ -43,6 +45,7 @@ PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
 PROJECT_CHANGE = f'/{PROJECTS_NS}/{CHANGE}'
 PROJECT_FILE_DELETE = f'/{PROJECTS_NS}/{FILE}/{DELETE}'
 PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
+PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
 
 
 USER_DICT = f'/{DICT}'
@@ -189,7 +192,7 @@ def get_file_name(name):
     """
     get the name of the file
     """
-    response = requests.get(URL+f'/{name}'+'/0')
+    response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/0')
     if response.status_code == 200:
         return response.json()['filename']
     return None
@@ -199,7 +202,11 @@ def get_file(name):
     """
     get the file for download
     """
-    response = requests.get(URL+f'/{name}'+'/1')
-    return send_file(response,
+    response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/1')
+    filename = response.headers.get('content-disposition', '').split('"')[-2]
+    file_mimetype, encoding  = mimetypes.guess_type(filename)
+    return send_file(response.content,
                      as_attachment=True,
-                     attachment_filename=response.filename)
+                     attachment_filename=filename,
+                     mimetype=file_mimetype
+                     )
