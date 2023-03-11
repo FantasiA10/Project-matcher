@@ -109,7 +109,19 @@ def single_post(project):
     """
     todo
     """
+    project_detail = sc.get_project_details(project)
+    filename = sc.get_file_name(project)
+    return render_template('post.html', project=project_detail,
+                           filename=filename)
+
+
+@app.route('/download/<project>', methods=['POST'])
+def download(project):
+    """
+    download description file
+    """
     project = sc.get_project_details(project)
+    sc.get_file(project)
     return render_template('post.html', project=project)
 
 

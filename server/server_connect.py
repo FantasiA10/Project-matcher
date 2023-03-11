@@ -1,6 +1,5 @@
 import requests
-import base64
-import json
+from flask import send_file
 
 LIST = 'list'
 DICT = 'dict'
@@ -184,3 +183,23 @@ def add_file(file_detail):
         return {MESSAGE: 'Project Changed.'}
     else:
         print(f"Request failed with status code {response_post.status_code}")
+
+
+def get_file_name(name):
+    """
+    get the name of the file
+    """
+    response = requests.get(URL+f'/{name}'+'/0')
+    if response.status_code == 200:
+        return response.json()['filename']
+    return None
+
+
+def get_file(name):
+    """
+    get the file for download
+    """
+    response = requests.get(URL+f'/{name}'+'/1')
+    return send_file(response,
+                     as_attachment=True,
+                     attachment_filename=response.filename)

@@ -107,10 +107,10 @@
                         <h6 class="card-title">File Uploaded</h6></div>
                     <div class="card-body">
                         <ul class="list-unstyled">
-                        <li><a href="#" style="color:#57068c;">file1.pdf</a></li>
-                        <li><a href="#" style="color:#57068c;">file2.docx</a></li>
-                        <li><a href="#" style="color:#57068c;">file3.jpg</a></li>
-                        </ul>
+                            {% if filename%}
+                                <li><a href="{{url_for('download', project = project.name)}}" style="color:#57068c;">{{filename}}</a></li>
+                            {% endif %}
+                            </ul>
                     </div>
                 </div>
             </div>
