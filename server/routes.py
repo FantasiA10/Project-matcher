@@ -84,14 +84,22 @@ def add_project():
       'skill requirements': request.form['skill'],
       'post_date': datetime.datetime.today().strftime("%m-%d-%Y"),
       "description": request.form["description"],
-      "if_approve": True
-      #todo need request("FS")
+      "if_approve": True,
     }
+    file = request.files.get('file')
     if sc.check_if_exist(request.form['name']):
         flash("Error: Project name already existed.")
         return render_template('add_project.html')
     else:
         sc.add_project(project_details)
+        if file:
+            file_contents = file.read()
+            file_detail = {
+                'name': request.form['name'],
+                'filename': file.filename,
+                'filedata': file_contents,
+            }
+            sc.add_file(file_detail)
         flash("Thank you for sharing your project with us.")
         return render_template('my_project.html')
 

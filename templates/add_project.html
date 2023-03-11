@@ -39,7 +39,7 @@
     
           <h1 class="center"> <strong>Create A New Project</strong></h1>
     
-          <form action="http://127.0.0.1:5000/add_project" method="post">
+          <form action="http://127.0.0.1:5000/add_project" method="post" enctype="multipart/form-data">
 
             <label for="name">Project Name</label>
             <input type="text" name="name" class="field" required>
@@ -88,7 +88,7 @@
             <input style="height:200px;" type="description" name="description" class="field"s>
 
             <label for="FS">Upload File (should be smaller than 75 kB) </label>
-            <input type="file" id="FS" class="field"/>
+            <input type="file" name='file' id="file" class="field"/>
     
             <input type="submit" value="Submit" class="btn">
 

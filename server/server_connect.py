@@ -1,4 +1,6 @@
 import requests
+import base64
+import json
 
 LIST = 'list'
 DICT = 'dict'
@@ -24,6 +26,8 @@ POST_DATE = 'post_date'
 DESCRIP = 'description'
 APPROVE = "if_approve"
 FIELD = 'field'
+FILE = 'file'
+DELETE = 'delete'
 
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
@@ -38,6 +42,9 @@ PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
 PROJECT_CHANGE = f'/{PROJECTS_NS}/{CHANGE}'
+PROJECT_FILE_DELETE = f'/{PROJECTS_NS}/{FILE}/{DELETE}'
+PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
+
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -161,3 +168,19 @@ def change_project_single_field(name, field, val):
         return {MESSAGE: 'Project Changed.'}
     else:
         print(f"Request failed with status code {response.status_code}")
+
+
+def add_file(file_detail):
+    """
+    add a description file to a project
+    """
+    name = file_detail['name']
+    file_name = file_detail['filename']
+    file_data = {'file': (file_name, file_detail['filedata'])}
+    response_delete = requests.get(URL+PROJECT_FILE_DELETE)
+    response_post = requests.post(URL+PROJECT_FILE_ADD + f'/{name}' +
+                                  f'/{file_name}', files=file_data)
+    if response_post.status_code == 200 and response_delete.status_code == 200:
+        return {MESSAGE: 'Project Changed.'}
+    else:
+        print(f"Request failed with status code {response_post.status_code}")
