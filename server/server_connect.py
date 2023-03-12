@@ -33,6 +33,7 @@ GET = 'get'
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
+APPLICATIONS_NS = 'applications'
 
 URL = "https://project-finder.herokuapp.com/"
 
@@ -55,6 +56,10 @@ USER_ADD = f'/{USERS_NS}/{ADD}'
 USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
 
+APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
+APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
+APPLICATION_LIST = f'/{APPLICATIONS_NS}/{LIST}'
+APPLICATION_ADD = f'/{APPLICATIONS_NS}/{ADD}'
 
 def user_exists(users):
     response = requests.get(URL+USER_DETAILS+f'/{users}')
@@ -210,3 +215,42 @@ def get_file(name):
                      attachment_filename=filename,
                      mimetype=file_mimetype
                      )
+
+
+def get_application_details(application):
+    response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
+    if response.status_code == 200:
+        return response.json()['application detail']
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def get_applications_dict():
+    response = requests.get(URL+APPLICATION_DICT)
+    if response.status_code == 200:
+        application = response.json()
+        return application[DATA]
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def application_exist(application):
+    """
+    check whether or not an application exists.
+    """
+    response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
+    if response.status_code == 200:
+        return response.json()['application detail']
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def add_application(details):
+    """
+    send application to server
+    """
+    response = requests.post(URL+APPLICATION_ADD, json=details)
+    if response.status_code == 200:
+        return {MESSAGE: 'Application added.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
