@@ -38,28 +38,52 @@
           <section class="table__body">
               <table>
                   <thead>
-                      <tr>
-                          <th> Project Id
-                          <th> Project Name                           
-                          <th> Sponsor
-                          <th> Department
-                          <th> Posted Date 
-                          <th> Application Status
-                          <th> Manage Application
+                      <tr>                          
+                          <th> Applicant Name
+                          <th> Applicant Email
+                          <th> Project Name 
+                          <th> Application Date
+                          <th> Resume
+                          <th> Transcript
                       </tr>
                   </thead>
                   <tbody>
+                        {% for i in range(application_lst |length)%}
                         <tr>
-                            <td> 1001 </td>
-                            <td> Project_name1 </td>                         
-                            <td> <img src="static/images/steven.jpg" alt=""> Sponsor1 </td>
-                            <td> CS </td> 
-                            <td> 02-11-2023 </td> 
-                            <td>
-                            <p class="status delivered">Approved</p>
-                            </td>
-                            <td> (edit/drop) </td> 
-                        </tr>
+                            <td> {{application_lst[i].resume}} </td>
+                            <td><strong> {{application_lst[i].applicant_name}} </strong></td>
+                                
+    
+                                <td> {{application_lst[i].applicant_email}} </td>
+                                <td> {{application_lst[i].applied_project}} </td>
+                                <td> {{application_lst[i].application_date}} </td>
+                                <td> 
+                                    <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
+                                    <div class="export__file" >
+                                        <input type="checkbox" id="export-file" x>
+                                        <div class="export__file-options">
+                                            <label for="export-file" id="toPDF" >
+                                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
+                                                View Details &nbsp; &#10140;</a>
+                                            </label>
+        
+                                            <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
+                                    </div>
+                                    </td>
+                                <td> 
+                                <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
+                                <div class="export__file" >
+                                    <input type="checkbox" id="export-file" x>
+                                    <div class="export__file-options">
+                                        <label for="export-file" id="toPDF" >
+                                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
+                                            View Details &nbsp; &#10140;</a>
+                                        </label>
+    
+                                        <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
+                                </div>
+                                </td>
+                            {%endfor%}
                   </tbody>
               </table>
           </section>
