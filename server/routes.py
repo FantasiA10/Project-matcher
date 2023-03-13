@@ -130,12 +130,16 @@ def my_project():
     return render_template('my_project.html')
 
 
-@app.route('/my_application')
+@app.route('/my_application', methods=['GET', 'POST'])
 def my_application():
     """
     Return my application page
     """
-    return render_template('my_application.html')
+    application_lst = []
+    application_dict = sc.get_applications_dict()
+    for key in application_dict:
+        application_lst.append(application_dict[key])
+    return render_template('my_application.html', application_lst=application_lst)
 
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
