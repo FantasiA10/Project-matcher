@@ -48,7 +48,6 @@ PROJECT_FILE_DELETE = f'/{PROJECTS_NS}/{FILE}/{DELETE}'
 PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
 PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
 
-
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
 USER_LIST = f'/{USERS_NS}/{LIST}'
@@ -60,6 +59,7 @@ APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
 APPLICATION_LIST = f'/{APPLICATIONS_NS}/{LIST}'
 APPLICATION_ADD = f'/{APPLICATIONS_NS}/{ADD}'
+APPLICATION_USER = f'/{APPLICATIONS_NS}/{USER}'
 
 def user_exists(users):
     response = requests.get(URL+USER_DETAILS+f'/{users}')
@@ -199,7 +199,13 @@ def get_file_name(name):
     """
     response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/0')
     if response.status_code == 200:
-        return response.json()['filename']
+        the_dict = response.json()
+        """ 
+        Check if the project has uploaded file
+        """
+        if 'filename' in the_dict:
+            return response.json()['filename']
+        return None
     return None
 
 
@@ -216,11 +222,14 @@ def get_file(name):
                      mimetype=file_mimetype
                      )
 
+"""
+Application
+"""
 
 def get_application_details(application):
     response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
     if response.status_code == 200:
-        return response.json()['application detail']
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 
@@ -241,6 +250,17 @@ def application_exist(application):
     response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
     if response.status_code == 200:
         return response.json()['application detail']
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def get_user_application(user_email):
+    """
+    Get all applications of a user
+    """
+    response = requests.get(URL+APPLICATION_USER+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 
