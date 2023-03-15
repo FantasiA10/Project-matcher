@@ -48,14 +48,11 @@
                   <tbody>
                         {% for i in range(application_lst |length)%}
                         <tr>
-                            <td> {{application_lst[i].resume}} </td>
-                            <td><strong> {{application_lst[i].applicant_name}} </strong></td>
-                                
-    
-                                <td> {{application_lst[i].applicant_email}} </td>
-                                <td> {{application_lst[i].applied_project}} </td>
-                                <td> {{application_lst[i].application_date}} </td>
-                            {%endfor%}
+                            <td><strong> {{application_lst[i].resume}} </strong></td>
+                                <td> {{application_lst[i].resume}} </td>
+                                <td> {{application_lst[i].resume}} </td>
+                                <td> {{application_lst[i].resume}} </td>
+                        {%endfor%}
                   </tbody>
               </table>
           </section>

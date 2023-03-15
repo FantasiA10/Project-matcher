@@ -77,3 +77,52 @@ def login_required(f):
         else:
             return redirect('/')
     return wrap
+
+
+def application_form(key_word=None):
+    """
+    Return application list
+    """
+    temp_application_dict = sc.get_applications_dict()
+    application_lst = []
+    application_dict = {}
+    for key in temp_application_dict:
+        application_lst.append(temp_application_dict[key])
+        application_dict[key] = temp_application_dict[key]
+    
+    if not key_word or not temp_application_dict:
+        return application_lst
+    return rank_for_relation_to_key_work(application_dict, key_word.lower())
+
+
+def dict_to_lst_of_string(application_dict):
+    """
+    transfer dict to list store with content as plain text and keys
+    """
+    ret_lst = []
+    for key in application_dict:
+        temp = ''
+        for sub_key in application_dict[key]:
+            if sub_key == 'account':
+                temp = temp + application_dict[key]["account"]['email'] + " " + \
+                    application_dict[key]["account"]['name']
+            elif isinstance(application_dict[key][sub_key], str):
+                temp += " " + application_dict[key][sub_key]
+        ret_lst.append([key, temp.lower()])
+    return ret_lst
+
+
+def rank_for_relation_to_key_work(application_dict, key_word):
+    """
+    return ranked application based on relation to key_word
+    """
+    unrank_lst = dict_to_lst_of_string(application_dict)
+    heap = []
+    ret_application_lst = []
+    for ele in unrank_lst:
+        score = difflib.SequenceMatcher(None, key_word, ele[1]).ratio()
+        heapq.heappush(heap, (-score, ele[0]))
+    while len(heap) > 0:
+        curr_proj = application_dict[heapq.heappop(heap)[1]]
+        ret_application_lst.append(curr_proj)
+    return ret_application_lst
