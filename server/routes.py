@@ -135,10 +135,10 @@ def my_application():
     """
     Return my application page
     """
+    temp_application_dict = sc.get_applications_dict()
     application_lst = []
-    application_dict = sc.get_applications_dict()
-    for key in application_dict:
-        application_lst.append(application_dict[key])
+    for key in temp_application_dict:
+        application_lst.append(temp_application_dict[key])
     return render_template('my_application.html', application_lst=application_lst)
 
 

@@ -43,8 +43,6 @@
                           <th> Applicant Email
                           <th> Project Name 
                           <th> Application Date
-                          <th> Resume
-                          <th> Transcript
                       </tr>
                   </thead>
                   <tbody>
@@ -57,32 +55,6 @@
                                 <td> {{application_lst[i].applicant_email}} </td>
                                 <td> {{application_lst[i].applied_project}} </td>
                                 <td> {{application_lst[i].application_date}} </td>
-                                <td> 
-                                    <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                                    <div class="export__file" >
-                                        <input type="checkbox" id="export-file" x>
-                                        <div class="export__file-options">
-                                            <label for="export-file" id="toPDF" >
-                                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
-                                                View Details &nbsp; &#10140;</a>
-                                            </label>
-        
-                                            <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
-                                    </div>
-                                    </td>
-                                <td> 
-                                <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                                <div class="export__file" >
-                                    <input type="checkbox" id="export-file" x>
-                                    <div class="export__file-options">
-                                        <label for="export-file" id="toPDF" >
-                                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
-                                            View Details &nbsp; &#10140;</a>
-                                        </label>
-    
-                                        <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
-                                </div>
-                                </td>
                             {%endfor%}
                   </tbody>
               </table>

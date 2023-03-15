@@ -11,6 +11,7 @@ ADD = 'add'
 CHANGE = 'change'
 DELETE = 'delete'
 VALUE = 'value'
+USER = 'user'
 
 TEST_PROJECT_NAME = 'Test project'
 NAME = 'name'
@@ -34,6 +35,11 @@ DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
 APPLICATIONS_NS = 'applications'
+APPLICANT_NAME = 'applicant_name'
+APPLICANT_EMAIL = 'applicant_email'
+APPLICATION_DATE = 'application_date'
+PROJECT_NAME = 'project_name'
+
 
 URL = "https://project-finder.herokuapp.com/"
 
