@@ -43,15 +43,25 @@
                           <th> Applicant Email
                           <th> Project Name 
                           <th> Application Date
+                          <th> Resume and Transcript
                       </tr>
                   </thead>
                   <tbody>
                         {% for i in range(application_lst |length)%}
                         <tr>
-                            <td><strong> {{application_lst[i].resume}} </strong></td>
-                                <td> {{application_lst[i].resume}} </td>
-                                <td> {{application_lst[i].resume}} </td>
-                                <td> {{application_lst[i].resume}} </td>
+                            <td><strong> {{application_lst[i].applicant_name}} </strong></td>
+                            <td> {{application_lst[i].applicant_email}} </td>
+                            <td><strong> {{application_lst[i].applied_project}} </strong></td>
+                            <td> {{application_lst[i].application_date}} </td>
+                            <td> 
+                                <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
+                                <div class="export__file" >
+                                    <input type="checkbox" id="export-file" x>
+                                    <div class="export__file-options">
+                                        <label for="export-file" id="toPDF">Resume &nbsp; &#10140;</label>
+                                        <label for="export-file" id="toPDF">Transcript &nbsp; &#10140;</label>
+                                </div>
+                            </td>
                         {%endfor%}
                   </tbody>
               </table>

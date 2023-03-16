@@ -37,8 +37,10 @@ USERS_NS = 'users'
 APPLICATIONS_NS = 'application'
 APPLICANT_NAME = 'applicant_name'
 APPLICANT_EMAIL = 'applicant_email'
-APPLICATION_DATE = 'application_date'
-PROJECT_NAME = 'project_name'
+PROJECT = 'applied_project'
+APP_DATE = 'application_date'
+RESUME = 'resume'
+TRANSCRIPT = 'transcript'
 
 
 URL = "https://project-finder.herokuapp.com/"
