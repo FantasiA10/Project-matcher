@@ -135,8 +135,18 @@ def my_application():
     """
     Return my application page
     """
-    application_lst = module.application_form()
-    return render_template('my_application.html', application_lst=application_lst)
+
+    if session['logged_in'] == True:
+        user_email = session['user']['email']
+        application_lst = sc.get_user_application(user_email)[user_email]
+        
+        if application_lst == []:
+            flash("You have not created any applications yet.")
+    
+        return render_template('my_application.html', application_lst=application_lst)
+
+    return render_template('my_application.html', application_lst=None)
+
 
 
 @app.route('/homepage_search', methods=['GET', 'POST'])

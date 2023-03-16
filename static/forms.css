@@ -77,9 +77,12 @@ main.table {
     width: 95%;
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
+    font-family: sans-serif;
+    font-size: 17px;
 
     margin: .8rem auto;
     border-radius: .6rem;
+    border: none;
 
     overflow: auto;
     overflow: overlay;
@@ -113,10 +116,12 @@ td img {
     vertical-align: middle;
 }
 
-table, td {
+table, td, th{
+    border-style : hidden!important;
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
+    font-family: sans-serif;
 }
 
 th {
@@ -125,6 +130,7 @@ th {
     padding: 1rem;
     text-align: left;
     font-size: 17px;
+    font-family: sans-serif;
 }
 
 thead th {
@@ -214,7 +220,7 @@ thead th span.icon-arrow {
     
     text-align: center;
     font-size: 1rem;
-    
+    font-family: sans-serif;
     margin-left: .5rem;
     transition: .2s ease-in-out;
 }
