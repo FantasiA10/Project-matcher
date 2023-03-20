@@ -122,12 +122,27 @@ def download(project):
     """
     return sc.get_file(project)
 
-@app.route('/my_project')
+@app.route('/my_project', methods=['GET', 'POST'])
 def my_project():
     """
     Return my project page
     """
-    return render_template('my_project.html')
+
+    """
+    if session['logged_in'] == True:
+        user_email = session['user']['email']
+        project_lst = sc.get_user_project(user_email)[user_email]
+        
+        if project_lst == []:
+            flash("You have not created any project yet.")
+    
+        return render_template('my_project.html', project_lst=project_lst)
+
+    return render_template('my_project.html', project_lst=None)
+    """
+    
+    project_lst = module.homepage_form()
+    return render_template('my_project.html', project_lst=project_lst)
 
 
 @app.route('/my_application', methods=['GET', 'POST'])
@@ -141,7 +156,7 @@ def my_application():
         application_lst = sc.get_user_application(user_email)[user_email]
         
         if application_lst == []:
-            flash("You have not created any applications yet.")
+            flash("You have not created any application yet.")
     
         return render_template('my_application.html', application_lst=application_lst)
 

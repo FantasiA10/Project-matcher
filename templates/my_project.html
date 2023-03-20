@@ -71,15 +71,17 @@
                       </tr>
                   </thead>
                   <tbody>
+                        {% for i in range(project_lst |length)%}
                         <tr>
                             <td>
                               <p class="status cancelled"><span class="badge">NOT FULL</span></p>
                             </td>
-                            <td> 1001 </td>
-                            <td> Project_name1 </td>
+                            <td> {{i+1}} </td>
+                            <td> {{project_lst[i].name}} </td>
                             <td> 11/19 </td>
                             <td> (Button) </td>
                             <td> (Button) </td>
+                        {%endfor%}
                         </tr>
                   </tbody>
               </table>
