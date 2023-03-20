@@ -55,6 +55,7 @@ PROJECT_CHANGE = f'/{PROJECTS_NS}/{CHANGE}'
 PROJECT_FILE_DELETE = f'/{PROJECTS_NS}/{FILE}/{DELETE}'
 PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
 PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
+PROJECT_USER = f'/{PROJECTS_NS}/{USER}'
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -166,6 +167,17 @@ def add_project(details):
     response = requests.post(URL+PROJECT_ADD, json=details)
     if response.status_code == 200:
         return {MESSAGE: 'Project added.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def get_user_project(user_email):
+    """
+    Get all projects of a user
+    """
+    response = requests.get(URL+PROJECT_USER+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 

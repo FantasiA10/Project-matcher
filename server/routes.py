@@ -128,7 +128,6 @@ def my_project():
     Return my project page
     """
 
-    """
     if session['logged_in'] == True:
         user_email = session['user']['email']
         project_lst = sc.get_user_project(user_email)[user_email]
@@ -139,10 +138,6 @@ def my_project():
         return render_template('my_project.html', project_lst=project_lst)
 
     return render_template('my_project.html', project_lst=None)
-    """
-    
-    project_lst = module.homepage_form()
-    return render_template('my_project.html', project_lst=project_lst)
 
 
 @app.route('/my_application', methods=['GET', 'POST'])
