@@ -149,7 +149,7 @@ def exist(name):
     """
 
 
-def check_if_exist(project):
+def project_exist(project):
     """
     check whether or not a project exists.
     """
@@ -291,6 +291,6 @@ def add_application(details):
     """
     response = requests.post(URL+APPLICATION_ADD, json=details)
     if response.status_code == 200:
-        return {MESSAGE: 'Application added.'}
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")

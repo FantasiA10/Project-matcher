@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add your project</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+
+      <div id="header" class="left">
+        <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+        <a href="{{url_for('my_application') }}" class="btn">Applications</a>
+        <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+        <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+        <a href="{{url_for('account') }}" class="btn">Account</a>
+      </div>
+
+  </head>
+  <div class = "container">
+    {% with error_mes = get_flashed_messages(category_filter=["danger"]) %}
+    {% if error_mes %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" > 
+
+          <strong>{{ error_mes[0]}}</strong> You should check on the fields below.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        </div> 
+      </div>
+    {% endif %}
+    {% endwith %}
+  </div>
+
+
+<body>
+    <div class="card-wrapper">
+
+        <div class="card2" style="width:800px;">
+    
+          <h1 class="center"> <strong>Application</strong></h1>
+    
+          <form action="http://127.0.0.1:5000/add_project" method="post" enctype="multipart/form-data">
+            
+            <label for="name">Your Full Name </label>
+            <input type="text" name="application name" class="field" required>
+
+            <label for="applied project">Applied Project</label>
+            <select id="select" class="field">
+                <option value="default">Select a Project</option>
+            </select>
+            
+            <script>              
+                var select = document.getElementById("select"),
+                         arr = ["Test Project","new project","temp proj"];
+                 
+                 for(var i = 0; i < arr.length; i++)
+                 {
+                     var option = document.createElement("OPTION"),
+                         txt = document.createTextNode(arr[i]);
+                     option.appendChild(txt);
+                     option.setAttribute("value",arr[i]);
+                     select.insertBefore(option,select.lastChild);
+                 }
+                 
+            </script>
+
+            <label for="name">Application Name</label>
+            <input type="text" name="application name" class="field" required>
+
+            <label for="FS">Upload your resume and transcript (should be smaller than 75 kB) </label>
+            <input type="file" name='file' id="file" class="field"/>
+            <input type="file" name='file' id="file" class="field"/>
+    
+            <input type="submit" value="Submit" class="btn">
+
+          </form>
+          
+        </div>
+      
+      </div>
+
+</body>
+
+</html>

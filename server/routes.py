@@ -87,7 +87,7 @@ def add_project():
       "if_approve": True,
     }
     file = request.files.get('file')
-    if sc.check_if_exist(request.form['name']):
+    if sc.project_exist(request.form['name']):
         flash("Error: Project name already existed.", "danger")
         return render_template('add_project.html')
     else:
@@ -155,6 +155,32 @@ def my_application():
     else:
         flash("Please login.")
         return render_template('my_application.html', application_lst=None)
+
+
+@app.route('/apply', methods=['GET', 'POST'])
+def apply():
+    """
+    Return GET and POST reques from apply page
+    """
+    if request.method == 'GET':
+        return render_template('apply.html')
+    else:
+        apl_details = {
+        'application_name': request.form['application name'],
+        'applicant_name': request.form['full name'],
+        'applicant_email': session['user']["email"],
+        'applied_project': request.form['applied project'],
+        'application_date': datetime.datetime.today().strftime("%m-%d-%Y"),
+        'transcript': "string",
+        'resume': "string",
+        'application_status': "Pending",
+        }
+        file = request.files.get('file')
+
+        sc.add_application(apl_details)
+
+        flash("Your application is submited.", "success")
+        return render_template('apply.html')
 
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
