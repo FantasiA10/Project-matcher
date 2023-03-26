@@ -166,7 +166,7 @@ def add_project(details):
     """
     response = requests.post(URL+PROJECT_ADD, json=details)
     if response.status_code == 200:
-        return {MESSAGE: 'Project added.'}
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 

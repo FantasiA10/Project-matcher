@@ -18,35 +18,12 @@
         <title>Home</title>
             <div id="header" class="left">
               <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-              <a href="{{url_for('my_application') }}" class="btn">Applications</a>
+              <a href="{{url_for('my_application') }}" class="btn">APPLICATIONS</a>
               <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
               <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
               <a href="{{url_for('account') }}" class="btn">Account</a>
             </div>
-    
-    {% for message in get_flashed_messages() %}
-    <div class="mx-auto" style="width: 1400px;" class = "mt-5">
-      <div class="alert alert-light alert-dismissible fade show" role="alert" > 
-      <style>
-        h4,p{text-align: left;}
-      </style>
 
-      <h4 class="alert-heading" >Well done! </h4>
-      <p> {{ message }} </p>
-      <hr>
-      <p>We would like to inform you that it may take 2-5 days for your project to pass through our review process and be published on our site.
-
-        During the review process, our team will carefully evaluate your project to ensure that it meets our requirements and is suitable for publication on our site. We may need to request additional information from you before it can be approved.
-        
-        We understand that you may be eager to have your project published as soon as possible, and we will do our best to complete the review process as quickly as we can. Thank you for your understanding and patience.
-      </p>
-      
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-      </div>
-    </div>
-
-  {% endfor %}  
     
   </head>
             
@@ -58,34 +35,44 @@
           <section class="table__header">
               <h1><strong>My Projects</strong><small>(Here includes all the projects you have created)</small></h1>
           </section>
+
           <section class="table__body">
-              <table>
-                  <thead>
+            <table>
+                <thead>
+                    <tr>                          
+                        <th> Status
+                        <th> Project Name
+                        <th> Post Date
+                        <th> Intended Majors
+                        <th> School yr
+                        <th> Operation
+                    </tr>
+                </thead>
+                <tbody>
+
+                      {% for i in range(project_lst |length)%}
                       <tr>
-                          <th> Project Status
-                          <th> Project Id
-                          <th> Project Name
-                          <th> Current/Required
-                          <th> Manage Applicants
-                          <th> Manage Project information
-                      </tr>
-                  </thead>
-                  <tbody>
-                        {% for i in range(project_lst |length)%}
-                        <tr>
-                            <td>
-                              <p class="status cancelled"><span class="badge">NOT FULL</span></p>
-                            </td>
-                            <td> {{i+1}} </td>
-                            <td> {{project_lst[i].name}} </td>
-                            <td> 11/19 </td>
-                            <td> (Button) </td>
-                            <td> (Button) </td>
-                        {%endfor%}
-                        </tr>
-                  </tbody>
-              </table>
-          </section>
+                          <td>  <p class="status delivered"><span class="badge">APPROVED</span></p></td>
+                          <td><strong>  
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
+                              {{project_lst[i].name}}</a>
+                          </strong></td>
+                          <td> <strong>{{project_lst[i].post_date}} </strong></td>
+                          <td> {{project_lst[i].major_requirements}} </td>
+                          <td> <strong> {{project_lst[i].school_year}} </strong></td>
+                          <td> 
+                              <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
+                              <div class="export__file" >
+                                  <input type="checkbox" id="export-file" x>
+                                  <div class="export__file-options">
+                                      <label for="export-file" id="toPDF">Edit project &nbsp; &#10140;</label>
+                                      <label for="export-file" id="toPDF">Delete project &nbsp; &#10140;</label>
+                              </div>
+                          </td>
+                      {%endfor%}
+                </tbody>
+            </table>
+        </section>
       </main>
     </body>
   <br>

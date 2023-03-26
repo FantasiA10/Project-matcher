@@ -88,7 +88,7 @@ def add_project():
     }
     file = request.files.get('file')
     if sc.check_if_exist(request.form['name']):
-        flash("Error: Project name already existed.")
+        flash("Error: Project name already existed.", "danger")
         return render_template('add_project.html')
     else:
         sc.add_project(project_details)
@@ -100,14 +100,14 @@ def add_project():
                 'filedata': file_contents,
             }
             sc.add_file(file_detail)
-        flash("Thank you for sharing your project with us.")
-        return render_template('my_project.html')
+        flash("Thank you for sharing your project with us.", "success")
+        return render_template('add_project.html')
 
 
 @app.route('/single_post/<project>', methods=['GET', 'POST'])
 def single_post(project):
     """
-    todo
+    Display more details about a single project
     """
     project_detail = sc.get_project_details(project)
     filename = sc.get_file_name(project)
@@ -118,26 +118,24 @@ def single_post(project):
 @app.route('/download/<project>', methods=['GET', 'POST'])
 def download(project):
     """
-    download description file
+    Download description file
     """
     return sc.get_file(project)
+
 
 @app.route('/my_project', methods=['GET', 'POST'])
 def my_project():
     """
     Return my project page
     """
-
     if session['logged_in'] == True:
         user_email = session['user']['email']
         project_lst = sc.get_user_project(user_email)[user_email]
-        
-        if project_lst == []:
-            flash("You have not created any project yet.")
     
         return render_template('my_project.html', project_lst=project_lst)
-
-    return render_template('my_project.html', project_lst=None)
+    else: 
+        flash("Please login.")
+        return render_template('my_project.html', project_lst=None)
 
 
 @app.route('/my_application', methods=['GET', 'POST'])
@@ -145,7 +143,6 @@ def my_application():
     """
     Return my application page
     """
-
     if session['logged_in'] == True:
         user_email = session['user']['email']
         application_lst = sc.get_user_application(user_email)[user_email]
@@ -154,9 +151,10 @@ def my_application():
             flash("You have not created any application yet.")
     
         return render_template('my_application.html', application_lst=application_lst)
-
-    return render_template('my_application.html', application_lst=None)
-
+    
+    else:
+        flash("Please login.")
+        return render_template('my_application.html', application_lst=None)
 
 
 @app.route('/homepage_search', methods=['GET', 'POST'])

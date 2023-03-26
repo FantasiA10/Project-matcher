@@ -20,17 +20,49 @@
       </div>
 
   </head>
-  {% for message in get_flashed_messages() %}
-    <div class="mx-auto" style="width: 1400px;" class = "mt-5">
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" > 
+  <div class = "container">
+    {% with error_mes = get_flashed_messages(category_filter=["danger"]) %}
+    {% if error_mes %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" > 
 
-        <strong>{{message}}</strong> You should check in on the field below.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <strong>{{ error_mes[0]  }}</strong> You should check on the fields below.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
+        </div> 
       </div>
-    </div>
+    {% endif %}
+    {% endwith %}
+  </div>
 
-  {% endfor %}  
+{% with success_mes = get_flashed_messages(category_filter=["success"]) %}
+{% if success_mes %}
+<div class = "container">
+  <div class="mx-auto" class = "mt-5">
+    <div class="alert alert-light alert-dismissible fade show" role="alert" > 
+    <style>
+      h4,p{text-align: left;}
+    </style>
+
+    <h4 class="alert-heading" >Well done! </h4>
+    <p> {{ success_mes[0] }}</p>
+    <hr>
+    <p>We would like to inform you that it may take 2-5 days for your project to pass through our review process and be published on our site.
+
+      During the review process, our team will carefully evaluate your project to ensure that it meets our requirements and is suitable for publication on our site. We may need to request additional information from you before it can be approved.
+      
+      We understand that you may be eager to have your project published as soon as possible, and we will do our best to complete the review process as quickly as we can. Thank you for your understanding and patience.
+    </p>
+    
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endwith %}
+
+
+
 
 <body>
     <div class="card-wrapper">
