@@ -77,6 +77,9 @@ To login to home page user should register a new account, and use that account t
 - Allow user to cancel a applications
 - Allow user to accept/reject applications of a project
 
+### Flowchart:
+![alt text](static/images/flowchart.png)
+
 
 resources of code for UI:
 head protray https://www.deviantart.com/karmaanddestiny/art/Default-user-icon-4-858661084
