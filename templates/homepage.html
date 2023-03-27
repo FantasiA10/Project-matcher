@@ -104,7 +104,7 @@
                           <th> Department
                           <th> Project Status
                           <th> Posted Date
-                          <th> More
+                          <th> More Detail
                       </tr>
                   </thead>
                   <tbody>
@@ -123,22 +123,13 @@
                             <td>
                             <p class="status delivered">OPEN</p>
                             </td>
-                            <td> <strong>{{project_lst[i].post_date}}</strong></td>
+                            <td> {{project_lst[i].post_date}}</td>
 
 
-                            <td> 
-                            <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                            <div class="export__file" >
-                                <input type="checkbox" id="export-file" x>
-                                <div class="export__file-options">
-                                    <label for="export-file" id="toPDF" >
-                                        <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
-                                        View Details &nbsp; &#10140;</a>
-                                    </label>
-
-                                    <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
-                            </div>
-                            </td>
+                            <td>
+                                <a href="{{url_for('single_post', project = project_lst[i].name)}}">
+                                    view more</a>
+                                </td>
                         {%endfor%}
                         </tr>
                   </tbody>

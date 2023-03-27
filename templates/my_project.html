@@ -57,9 +57,9 @@
                             <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
                               {{project_lst[i].name}}</a>
                           </strong></td>
-                          <td> <strong>{{project_lst[i].post_date}} </strong></td>
+                          <td> {{project_lst[i].post_date}} </td>
                           <td> {{project_lst[i].major_requirements}} </td>
-                          <td> <strong> {{project_lst[i].school_year}} </strong></td>
+                          <td> {{project_lst[i].school_year}} </td>
                           <td> 
                               <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
                               <div class="export__file" >
