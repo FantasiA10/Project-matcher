@@ -124,6 +124,7 @@ def download(project):
 
 
 @app.route('/my_project', methods=['GET', 'POST'])
+@module.login_required
 def my_project():
     """
     Return my project page
@@ -133,12 +134,10 @@ def my_project():
         project_lst = sc.get_user_project(user_email)[user_email]
     
         return render_template('my_project.html', project_lst=project_lst)
-    else: 
-        flash("Please login.")
-        return render_template('my_project.html', project_lst=None)
 
 
 @app.route('/my_application', methods=['GET', 'POST'])
+@module.login_required
 def my_application():
     """
     Return my application page
@@ -151,10 +150,6 @@ def my_application():
             flash("You have not created any application yet.")
     
         return render_template('my_application.html', application_lst=application_lst)
-    
-    else:
-        flash("Please login.")
-        return render_template('my_application.html', application_lst=None)
 
 
 @app.route('/apply', methods=['GET', 'POST'])
