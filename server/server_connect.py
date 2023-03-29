@@ -31,7 +31,6 @@ FILE = 'file'
 DELETE = 'delete'
 GET = 'get'
 
-DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
 APPLICATIONS_NS = 'application'
@@ -70,6 +69,9 @@ APPLICATION_LIST = f'/{APPLICATIONS_NS}/{LIST}'
 APPLICATION_ADD = f'/{APPLICATIONS_NS}/{ADD}'
 APPLICATION_USER = f'/{APPLICATIONS_NS}/{USER}'
 
+"""
+USER ENPOINTS
+"""
 def user_exists(users):
     response = requests.get(URL+USER_DETAILS+f'/{users}')
     if response.status_code == 200:
@@ -113,6 +115,10 @@ def user_signup(details):
         print(f"Request failed with status code {response.status_code}")
 
 
+""" 
+PROJECTS 
+"""
+
 def get_project_details(project):
     response = requests.get(URL+PROJECT_DETAILS+f'/{project}')
     if response.status_code == 200:
@@ -130,18 +136,27 @@ def get_projects_dict():
         print(f"Request failed with status code {response.status_code}")
 
 
+def get_projects_names():
+    """
+    Return a list of project names. This is used for the dropdown memu in the application form.
+    """
+    response = requests.get(URL+PROJECT_LIST)
+    if response.status_code == 200:
+        return response.json()["projects_list"]
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
 def del_project(name):
     """
     Delete a doc from db collection by its name.
     """
     
 
-
 def del_one(name):
     """
     todo
     """
-
 
 def exist(name):
     """

@@ -157,11 +157,13 @@ def apply():
     """
     Return GET and POST reques from apply page
     """
+    project_options = sc.get_projects_names()
+
     if request.method == 'GET':
-        return render_template('apply.html')
+        return render_template('apply.html', project_options=project_options)
     else:
         apl_details = {
-        'application_name': request.form['application name'],
+        'application_name': str(request.form['applied project']) + "/" + str(session['user']["email"]),
         'applicant_name': request.form['full name'],
         'applicant_email': session['user']["email"],
         'applied_project': request.form['applied project'],

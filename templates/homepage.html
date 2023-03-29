@@ -113,7 +113,7 @@
                             <td> {{i+1}} </td>
 
                             <td><strong>
-                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
                                 {{project_lst[i].name}}</a>
                             </strong></td>
                             
@@ -127,7 +127,7 @@
 
 
                             <td>
-                                <a href="{{url_for('single_post', project = project_lst[i].name)}}">
+                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
                                     view more</a>
                                 </td>
                         {%endfor%}

@@ -50,25 +50,13 @@
             <label for="applied project">Applied Project</label>
             <select id="select" name="applied project" class="field">
                 <option value="default">Select a Project</option>
+                  
+                {% for option in project_options %}
+                <option>
+                    {{ option }}
+                </option>
+                    {% endfor %}
             </select>
-            
-            <script>              
-                var select = document.getElementById("select"),
-                         arr = ["Test Project","new project","temp proj"];
-                 
-                 for(var i = 0; i < arr.length; i++)
-                 {
-                     var option = document.createElement("OPTION"),
-                         txt = document.createTextNode(arr[i]);
-                     option.appendChild(txt);
-                     option.setAttribute("value",arr[i]);
-                     select.insertBefore(option,select.lastChild);
-                 }
-                 
-            </script>
-
-            <label for="name">Application Name</label>
-            <input type="text" name="application name" class="field" required>
 
             <label for="FS">Upload your resume and transcript (should be smaller than 75 kB) </label>
             <input type="file" name='file' id="file" class="field"/>
