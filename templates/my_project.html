@@ -17,11 +17,13 @@
 
         <title>Home</title>
             <div id="header" class="left">
-              <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-              <a href="{{url_for('my_application') }}" class="btn">APPLICATIONS</a>
-              <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-              <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
-              <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
+                <a href="{{url_for('apply') }}" class="btn">Apply</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="/user/signout" class="btn">Sign Out</a>
             </div>
 
     
@@ -42,10 +44,10 @@
                     <tr>                          
                         <th> Status
                         <th> Project Name
-                        <th> Post Date
+                        <th> Posted Date
                         <th> Intended Majors
                         <th> School yr
-                        <th> Operation
+                        <th> Operations
                     </tr>
                 </thead>
                 <tbody>
@@ -54,20 +56,21 @@
                       <tr>
                           <td>  <p class="status delivered"><span class="badge">APPROVED</span></p></td>
                           <td><strong>  
-                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
                               {{project_lst[i].name}}</a>
                           </strong></td>
-                          <td> {{project_lst[i].post_date}} </td>
+                          <td><strong>  {{project_lst[i].post_date}} </strong> </td>
                           <td> {{project_lst[i].major_requirements}} </td>
                           <td> {{project_lst[i].school_year}} </td>
-                          <td> 
-                              <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                              <div class="export__file" >
-                                  <input type="checkbox" id="export-file" x>
-                                  <div class="export__file-options">
-                                      <label for="export-file" id="toPDF">Edit project &nbsp; &#10140;</label>
-                                      <label for="export-file" id="toPDF">Delete project &nbsp; &#10140;</label>
-                              </div>
+                          <td>
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; ">
+                                View More</a>
+                            <br>
+                            </br>
+                            <a href="{{url_for('my_project')}}" style="color:#57068c; ">
+                                Delete</a>
+                            <br>
+
                           </td>
                       {%endfor%}
                 </tbody>

@@ -339,8 +339,8 @@ about-background-container {
   }
 
 .homepage-jump-container {
-    background: rgb(4, 2, 36);
-    height: 850px;
+    background: #57068c;
+    height: 200px;
     position: relative;
     background-attachment: fixed;
     background-position: top center;
@@ -354,13 +354,13 @@ about-background-container {
 }
 
 .margin-left-bot-container{
-  padding-top:650px;
+  padding-top:50px;
   padding-left:50px;
   padding-right:50px;
 }
 
 .margin-left-mid-container{
-  padding-top:470px;
+  padding-top:100px;
   padding-left:50px;
   padding-right:50px;
 }

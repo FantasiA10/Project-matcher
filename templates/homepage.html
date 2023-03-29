@@ -14,9 +14,9 @@
         <title>Home</title>
             <div id="transparentheader">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-                <a href="{{url_for('my_application') }}" class="btn">Applications</a>
-                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+                <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
                 <a href="{{url_for('apply') }}" class="btn">Apply</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
                 <a href="{{url_for('login')}}" class="round-button">login</a>
@@ -63,15 +63,12 @@
         </br>
         <div class="homepage-jump-container">
             <display-area>
-                <div class="margin-left-top-container">
-                    <display-text>Service</display-text>
-                </div>
-                <div class="margin-left-mid-container">
-                    <sub-title-text>Available Projects<div></div></sub-title-text>
-                    <a href="{{url_for('homepage_local')}}" class="round-button">learn More</a>
+                <div class="margin-left-bot-container">
+                    <sub-title-text>Browse Projects</sub-title-text>
+                    <p-text> <br>that matches your interests <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
                 </div>
             </display-area>
-            <display-area style="background-image: url('/static/images/jump_mid.png'); background-size: cover;">
+            <display-area style="background:black; background-size: cover;">
                 <div class="margin-left-bot-container">
                     <sub-title-text>Post Project</sub-title-text>
                     <p-text> <br>in your research discipline <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
@@ -104,7 +101,7 @@
                           <th> Department
                           <th> Project Status
                           <th> Posted Date
-                          <th> More Detail
+                          <th> Operations
                       </tr>
                   </thead>
                   <tbody>
@@ -128,7 +125,7 @@
 
                             <td>
                                 <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
-                                    view more</a>
+                                    View More</a>
                                 </td>
                         {%endfor%}
                         </tr>

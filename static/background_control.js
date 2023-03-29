@@ -43,7 +43,7 @@ tableOpacity.forEach(element => {
 });
 
 const displayArea = document.querySelectorAll(".margin-left-bot-container");
-const firstDisplayArea = displayArea.item(0)
+const secondDisplayArea = displayArea.item(1)
 displayArea.forEach(function(displayArea){
   displayArea.addEventListener("mouseover", () => {
     displayArea.lastElementChild.style.opacity = 1;
@@ -52,9 +52,9 @@ displayArea.forEach(function(displayArea){
     displayArea.lastElementChild.style.opacity = 0;
   });
   displayArea.addEventListener("click", () => {
-    if(displayArea==firstDisplayArea){
+    if(displayArea==secondDisplayArea){
       window.location.href = "add_project";}
     else{
-      window.location.href = "my_application";};
+      window.location.href = "apply";};
   });
 });

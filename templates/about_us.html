@@ -11,11 +11,12 @@
         <link rel="stylesheet" href="/static/word_animation.css">
         <div id="transparentheader">
             <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-            <a href="{{url_for('my_application') }}" class="btn">Applications</a>
-            <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-            <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+            <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
+            <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
+            <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
+            <a href="{{url_for('apply') }}" class="btn">Apply</a>
             <a href="{{url_for('account') }}" class="btn">Account</a>
-            <a href="{{url_for('login')}}" class="round-button">login</a>
+            <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
         </div>
     </head>
 
