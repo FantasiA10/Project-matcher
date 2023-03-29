@@ -36,24 +36,24 @@ def login():
     return User().login()
 
 
-@app.route('/')
-def home():
-    """
-    Return login page
-    """
-    return render_template('user_login.html')
-
-
-@app.route('/homepage', methods=['GET', 'POST'])
-@module.login_required
+@app.route('/', methods=['GET', 'POST'])
 def homepage():
     """
     Return homepage with list of projects
     """
-    if session["user"]['email'].split('_')[0] == "Manager":
-        return redirect('/manager_homepage')
+    # if session["user"]['email'].split('_')[0] == "Manager":
+    #     return redirect('/manager_homepage')
+
     project_lst = module.homepage_form()
     return render_template('homepage.html', project_lst=project_lst)
+
+
+@app.route('/loginpage')
+def loginpage():
+    """
+    Return login page
+    """
+    return render_template('user_login.html')
 
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
@@ -66,6 +66,7 @@ def homepage_local():
 
 
 @app.route('/add_project', methods=['GET', 'POST'])
+@module.login_required
 def add_project():
     """
     Return GET and POST reques from add project page
@@ -153,6 +154,7 @@ def my_application():
 
 
 @app.route('/apply', methods=['GET', 'POST'])
+@module.login_required
 def apply():
     """
     Return GET and POST reques from apply page
@@ -209,6 +211,7 @@ def get_css_file(css_file):
 
 
 @app.route("/account", methods=['GET', 'POST'])
+@module.login_required
 def account():
     """
     todo
@@ -218,6 +221,7 @@ def account():
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])
+# @module.login_required
 def manager_homepage():
     """
     todo

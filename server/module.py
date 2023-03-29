@@ -75,5 +75,5 @@ def login_required(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            return redirect('/')
+            return redirect('/loginpage')
     return wrap
