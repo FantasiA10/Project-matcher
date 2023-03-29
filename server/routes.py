@@ -41,9 +41,6 @@ def homepage():
     """
     Return homepage with list of projects
     """
-    # if session["user"]['email'].split('_')[0] == "Manager":
-    #     return redirect('/manager_homepage')
-
     project_lst = module.homepage_form()
     return render_template('homepage.html', project_lst=project_lst)
 
@@ -57,12 +54,16 @@ def loginpage():
 
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
+@module.login_required
 def homepage_local():
     """
-    todo return homepage base on account passed in through url
+    return homepage base on account passed in through url
     """
+    if session["user"]['email'].split('_')[0] == "Manager":
+        return redirect('/manager_homepage')
+
     project_lst = module.homepage_form()
-    return render_template('homepage.html', project_lst=project_lst)
+    return render_template('homepage_local.html', project_lst=project_lst)
 
 
 @app.route('/add_project', methods=['GET', 'POST'])

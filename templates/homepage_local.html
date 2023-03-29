@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Our CSS -->
+        <link rel="stylesheet" href="/static/forms.css">
+        <link rel="stylesheet" href="/static/normalize.css">
+        <link rel="stylesheet" href="/static/footer_style.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/word_animation.css">
+        <title>Home</title>
+            <div id="transparentheader">
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
+                <a href="{{url_for('apply') }}" class="btn">Apply</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="{{url_for('signout')}}" class="round-button">Sign Out</a>
+            </div>
+    </head>
+    <body>
+        <div>
+            <header>
+                <div class="header-container">
+                    <h5>
+                        <span><i>Discover </i></span>
+                        <span><i>Projects </i></span>
+                        <span><i>Align </i></span>
+                        <span><i>with </i></span>
+                        <span><i>Your </i></span>
+                        <span><i>Interests </i></span>
+                      </h5>
+                        <br>
+                        <div class="square-window"><p1>A research project matcher connects college students with projects that match their interests and skills<p1></div>
+                        <br>
+                    <h3><a href="/about_us" class="btn btn--secondary" style=" background-color:#57068c;">About Us</a></h3>
+                </div>
+            </header>
+        </div>
+        <div class="sub-header-container"><br><h1>What We Have Achieve</h1></div>
+        <div class="static-container">
+            <div></div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon1.png"></icon>
+                <br><h1>x User</h1>
+            </div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon2.png"></icon>
+                <br><h1>y Projects</h1>
+            </div>
+            <div class="three-block">
+                <icon><img src="/static/images/icon3.png"></icon>
+                <br><h1>z Applications</h1>
+            </div>
+            <div></div>
+        </div>
+
+        </br>
+        </br>
+        <div class="homepage-jump-container">
+            <display-area>
+                <div class="margin-left-bot-container">
+                    <sub-title-text>Browse Projects</sub-title-text>
+                    <p-text> <br>that matches your interests <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
+                </div>
+            </display-area>
+            <display-area style="background:black; background-size: cover;">
+                <div class="margin-left-bot-container">
+                    <sub-title-text>Post Project</sub-title-text>
+                    <p-text> <br>in your research discipline <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
+                </div>
+            </display-area>
+            <display-area>
+                <div class="margin-left-bot-container">
+                    <sub-title-text>Send Application</sub-title-text>
+                    <p-text> <br>to a current project <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
+                </div>
+            </display-area>
+        </div>
+    <br><br><br>
+    <table-opacity>
+      <main class="table">
+          <section class="table__header">
+              <h1><strong>Projects List</strong></h1>     
+              <form class="input-group" method = "POST" action = "/homepage_search">
+                  <input type="search" name="key_word" placeholder="Search" onkeyup="if (event.key === 'Enter') { this.form.submit(); }">
+                  <img src="static/images/search.png" alt="">
+              </form>
+          </section>
+          <section class="table__body">
+              <table>
+                  <thead>
+                      <tr>
+                          <th> ID
+                          <th> Project Name
+                          <th> Sponsor
+                          <th> Department
+                          <th> Project Status
+                          <th> Posted Date
+                          <th> Operations
+                      </tr>
+                  </thead>
+                  <tbody>
+                        {% for i in range(project_lst |length)%}
+                        <tr>
+                            <td> {{i+1}} </td>
+
+                            <td><strong>
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
+                                {{project_lst[i].name}}</a>
+                            </strong></td>
+                            
+
+                            <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
+                            <td> {{project_lst[i].department_name}} </td>
+                            <td>
+                            <p class="status delivered">OPEN</p>
+                            </td>
+                            <td> {{project_lst[i].post_date}}</td>
+
+
+                            <td>
+                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
+                                    View More</a>
+                                </td>
+                        {%endfor%}
+                        </tr>
+                  </tbody>
+              </table>
+          </section>
+      </main>
+    </table-opacity>
+  </body>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <body>
+    <footer class="footer">
+        <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social-icon">
+        <li class="social-icon__item"><a class="social-icon__link" href="#">
+            <ion-icon name="logo-facebook"></ion-icon>
+            </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="#">
+            <ion-icon name="logo-twitter"></ion-icon>
+            </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="#">
+            <ion-icon name="logo-linkedin"></ion-icon>
+            </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+            </a></li>
+        </ul>
+        <ul class="menu">
+        <li class="menu__item"><a class="menu__link" href="/homepage">Home</a></li>
+        <li class="menu__item"><a class="menu__link" href="/about_us">About</a></li>
+        <li class="menu__item"><a class="menu__link" href="/service">Services</a></li>
+        <li class="menu__item"><a class="menu__link" href="/team">Team</a></li>
+        <li class="menu__item"><a class="menu__link" href="/contact_us">Contact</a></li>
+
+        </ul>
+        <p>&copy;2023 Beijing GHWXZ</H1> | All Rights Reserved</p>
+    </footer>
+    <script type="text/javascript" src="/static/background_control.js" async></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+
+</html>
