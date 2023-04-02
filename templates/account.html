@@ -21,14 +21,18 @@
               <h1 class="center">Hello!  {{ session['user']['name'] }}</h1>
               <p class="center">You are currently logged in.</p>
               
-              <!-- a function to upload a profile image,incomplete yet -->
-              <!-- <input type="file"  accept="image/*" name="image" id="file" style="display: none;"> -->
+            <!-- a function to upload a profile image,incomplete yet -->
+            <!-- the function is not runnable since the its function was not yet added in endpoints -->
+            <body>
+              <h1 class="center">Upload Profile Image</h1>
+              <form class="center" method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <br><br>
+                <button type="submit">Upload</button>
+              </form>
+            </body>
 
-              <form action = "http://localhost:5000/uploader" method = "POST" 
-                enctype = "multipart/form-data">
-                <input type = "file" name = "file" />
-                <input type = "submit"/>
-              </form>   
+            <!--                    function end                     -->
               
               <br/>
         
