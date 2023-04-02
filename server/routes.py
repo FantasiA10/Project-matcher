@@ -291,12 +291,22 @@ def upload_image():
     """
     return render_template('upload.html')
 
-# @app.route('/uploader', methods = ['GET', 'POST'])
-# def upload_image():
-  #  if request.method == 'POST':
-  #     f = request.files['file']
-  #     f.save(secure_filename(f.filename))
-  #     return 'file uploaded successfully'
+@app.route('/', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # Get the file from the request
+        file = request.files['file']
+
+        # Save the file to the upload folder
+        filename = file.filename
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+
+        # Render the upload.html template with the filename
+        return render_template('account.html', filename=filename)
+
+    # Render the upload.html template if the request method is GET
+    return render_template('account.html')
 
 
 if __name__ == '__main__':
