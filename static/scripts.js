@@ -1,3 +1,4 @@
+
 $("form[name=signup_form").submit(function(e) {
 
   var $form = $(this);
@@ -56,4 +57,8 @@ function checkFileSize() {
   }
   // No custom constraint violation
   FS.setCustomValidity("");
+}
+
+function DeleteApplication(btndel) {
+  // TODO: call delete_application from server_connect
 }

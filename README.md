@@ -32,24 +32,14 @@ Backend Github Link: https://github.com/BowenGong2000/swe_project
 
 Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 
-## Project Setup Update: 
+## Access locally: 
 
-1. install pymongo, 
-    pip install pymongo
-2. install pymongo[srv]
-    pip install "pymongo[srv]"
-3. install passlib for password encyption
-    pip install passlib
-4. run command
-    sed -i -e 's/\r$//' server.sh
-5. run command
-    for Windows users: 
-        ./server.sh
-
-    for Mac users: 
-        ./run.sh-e
-
-Go to http://127.0.0.1:5000
+1. install pymongo `pip install pymongo`
+2. install pymongo[srv] `pip install "pymongo[srv]"`
+3. install passlib for password encyption `pip install passlib`
+4. run command `sed -i -e 's/\r$//' server.sh`
+5. run command `./server.sh`(Windows)  `./run.sh-e`(Mac)
+6. Go to http://127.0.0.1:5000
 
 
 ## Requirements

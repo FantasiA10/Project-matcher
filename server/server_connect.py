@@ -68,6 +68,7 @@ APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
 APPLICATION_LIST = f'/{APPLICATIONS_NS}/{LIST}'
 APPLICATION_ADD = f'/{APPLICATIONS_NS}/{ADD}'
 APPLICATION_USER = f'/{APPLICATIONS_NS}/{USER}'
+APPLICATION_DELETE = f'/{APPLICATIONS_NS}/{DELETE}'
 
 """
 USER ENPOINTS
@@ -305,6 +306,17 @@ def add_application(details):
     send application to server
     """
     response = requests.post(URL+APPLICATION_ADD, json=details)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        False
+
+
+def delete_application(application_name):
+    """
+    Allow users to retrieve their applications
+    """
+    response = requests.post(URL+APPLICATION_DELETE+f'/{application_name}')
     if response.status_code == 200:
         return response.json()
     else:

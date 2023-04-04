@@ -365,3 +365,15 @@ about-background-container {
   padding-right:50px;
 }
 
+.btn-outline-light{
+  border-color: #57068c; 
+  color: #57068c;
+  border-width: 2px;  
+}
+
+.btn-outline-light:hover {
+  background-color: #57068c;
+  border-color: #57068c;  
+  border-width: 1px; 
+  color: white
+}

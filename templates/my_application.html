@@ -76,8 +76,11 @@
                             </td>
                             <td>{{application_lst[i].transcript}}</td>
                             <td>
-                                <a href="{{url_for('my_application')}}" style="color:#57068c; text-decoration:none">
-                                    Retrieve</a>
+                                <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Retrieve
+                                    </button>
+
                             </td>
                         {%endfor%}
                   </tbody>
@@ -85,6 +88,30 @@
           </section>
       </main>
     </body>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Retrieve Application</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    Are you sure you want to retrieve this application? 
+                    Note: You cannot redo this action.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <a type="button" class="btn btn-outline-light" href="{{url_for('my_application')}}" onclick="DeleteApplication(application_lst[i].application_name)">
+                Delete </a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
 
   <br>
   <br>
