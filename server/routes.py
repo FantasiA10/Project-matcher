@@ -188,6 +188,15 @@ def apply():
             return render_template('apply.html', project_options=project_options)
 
 
+@app.route('/delete_apl/<apl_name>', methods=['POST'])
+def delete_apl(apl_name):
+    sc.delete_application(apl_name)
+
+    user_email = session['user']['email']
+    application_lst = sc.get_user_application(user_email)[user_email]
+    return render_template('my_application.html', application_lst=application_lst)
+
+
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():

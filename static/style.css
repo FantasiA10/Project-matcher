@@ -380,3 +380,8 @@ about-background-container {
   border-width: 1px; 
   color: white;
 }
+
+body.modal-open { overflow: auto; }
+.modal.in { pointer-events: none; }
+.modal-content { pointer-events:all; }
+.modal-backdrop { display: none; }
