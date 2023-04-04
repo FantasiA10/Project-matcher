@@ -27,7 +27,7 @@
     {% if error_mes %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert" > 
 
-          <strong>{{ error_mes[0]}}</strong> You should check on the fields below.
+          <strong>{{ error_mes[0]}}</strong> Please consider applying for other projects.
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
         </div> 
@@ -35,6 +35,29 @@
     {% endif %}
     {% endwith %}
   </div>
+
+
+  {% with success_mes = get_flashed_messages(category_filter=["success"]) %}
+  {% if success_mes %}
+  <div class = "container">
+    <div class="mx-auto" class = "mt-5">
+      <div class="alert alert-light alert-dismissible fade show" role="alert" > 
+      <style>
+        h4,p{text-align: left;}
+      </style>
+
+      <h4 class="alert-heading" >Nice Work! </h4>
+      <p> {{ success_mes[0] }} Your interest has been brought to the attention of the project leader, who will reach out to you via email.
+          Remember, you can always log back into your profile to view your status and if needed, withdraw your application.
+      </p>
+      
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endwith %}
 
 
 <body>

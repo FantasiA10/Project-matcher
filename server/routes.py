@@ -166,7 +166,7 @@ def apply():
         return render_template('apply.html', project_options=project_options)
     else:
         apl_details = {
-        'application_name': str(request.form['applied project']) + "/" + str(session['user']["email"]),
+        'application_name': str(request.form['applied project']) + "_" + str(session['user']["email"]),
         'applicant_name': request.form['full name'],
         'applicant_email': session['user']["email"],
         'applied_project': request.form['applied project'],
@@ -177,10 +177,16 @@ def apply():
         }
         file = request.files.get('file')
 
-        sc.add_application(apl_details)
+        application = str(request.form['applied project']) + "_" + str(session['user']["email"])
+        
+        if (sc.application_exist(application)):
+            flash("Error: You have already applied for this project.", "danger")
+            return render_template('apply.html', project_options=project_options)
+        else:
+            sc.add_application(apl_details)
+            flash("You successfully applied to " + "'" + request.form['applied project'] + "'.", "success")
+            return render_template('apply.html', project_options=project_options)
 
-        flash("Your application is submited.", "success")
-        return render_template('apply.html')
 
 
 @app.route('/homepage_search', methods=['GET', 'POST'])

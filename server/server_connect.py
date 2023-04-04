@@ -285,7 +285,7 @@ def application_exist(application):
     """
     response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
     if response.status_code == 200:
-        return response.json()['application detail']
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 
@@ -309,7 +309,7 @@ def add_application(details):
     if response.status_code == 200:
         return response.json()
     else:
-        False
+        print(f"Request failed with status code {response.status_code}")
 
 
 def delete_application(application_name):

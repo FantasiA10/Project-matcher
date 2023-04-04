@@ -58,7 +58,7 @@
                           <th> Applied Date
                           <th> Uploaded Resume
                           <th> Uploaded Transcript
-                          <th>  
+                          <th> Actions
                       </tr>
                   </thead>
                   <tbody>
@@ -77,8 +77,8 @@
                             <td>{{application_lst[i].transcript}}</td>
                             <td>
                                 <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        Retrieve
+                                    <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 120px">
+                                        Withdrawl
                                     </button>
 
                             </td>
@@ -99,12 +99,13 @@
             </div>
             <div class="modal-body">
                     Are you sure you want to retrieve this application? 
-                    Note: You cannot redo this action.
+                    Please note that you cannot redo this action.
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <a type="button" class="btn btn-outline-light" href="{{url_for('my_application')}}" onclick="DeleteApplication(application_lst[i].application_name)">
-                Delete </a>
+            <button type="button" class="btn btn-outline-light" onclick="DeleteApplication(application_lst[i].application_name)">
+                Yes </button>
+
             </div>
         </div>
         </div>
