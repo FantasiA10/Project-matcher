@@ -6,20 +6,30 @@ To build production, type `make prod`.
 
 To create the env for a new developer, run `make dev_env`.
 
-Tech Stack used for this project:
-Testing: pytest
-Server: Flask && flask-restx
-Lint: flake8
-Database: MongoDB
-CI/CD: Github Action
-Cloud deployment: Heroku
-Frontend: React
-###################################
+## Tech Stack used for this project:
 
-Backend deployed to Heroku at
-https://project-finder.herokuapp.com/
+Testing: pytest
+
+Server: Flask && flask-restx
+
+Lint: flake8
+
+Database: MongoDB
+
+CI/CD: Github Action
+
+Cloud deployment: Heroku
+
+
+Backend deployed to Heroku at https://project-finder.herokuapp.com/
+
+
+Frontend deployed to Heroku at https://project-matcher.herokuapp.com/
+
 
 Backend Github Link: https://github.com/BowenGong2000/swe_project
+
+
 Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 
 ## Project Setup Update: 
@@ -40,9 +50,7 @@ Frontend Github Link: https://github.com/FantasiA10/Project-matcher
         ./run.sh-e
 
 Go to http://127.0.0.1:5000
-The login and register page should appears. 
 
-To login to home page user should register a new account, and use that account to login to homepage. 
 
 ## Requirements
 
