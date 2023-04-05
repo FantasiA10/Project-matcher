@@ -55,6 +55,7 @@ PROJECT_FILE_DELETE = f'/{PROJECTS_NS}/{FILE}/{DELETE}'
 PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
 PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
 PROJECT_USER = f'/{PROJECTS_NS}/{USER}'
+PROJECT_DELETE = f'/{PROJECTS_NS}/{DELETE}'
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -171,7 +172,7 @@ def project_exist(project):
     """
     response = requests.get(URL+PROJECT_DETAILS+f'/{project}')
     if response.status_code == 200:
-        return response.json()['project detail']
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 
@@ -181,6 +182,17 @@ def add_project(details):
     send project to server
     """
     response = requests.post(URL+PROJECT_ADD, json=details)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def delete_project(project_name):
+    """
+    Allow users to delete their projects
+    """
+    response = requests.post(URL+PROJECT_DELETE+f'/{project_name}')
     if response.status_code == 200:
         return response.json()
     else:
@@ -314,7 +326,7 @@ def add_application(details):
 
 def delete_application(application_name):
     """
-    Allow users to retrieve their applications
+    Allow users to withdraw their applications
     """
     response = requests.post(URL+APPLICATION_DELETE+f'/{application_name}')
     if response.status_code == 200:
