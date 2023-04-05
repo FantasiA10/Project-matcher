@@ -158,7 +158,7 @@ def my_application():
         application_lst = sc.get_user_application(user_email)[user_email]
         
         if application_lst == []:
-            flash("You have not created any application yet.")
+            flash("You have not applied for any project yet.")
     
         return render_template('my_application.html', application_lst=application_lst)
 
