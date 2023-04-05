@@ -106,6 +106,15 @@ def add_project():
         return render_template('add_project.html')
 
 
+@app.route('/delete_pj/<pj_name>', methods=['POST'])
+def delete_pj(pj_name):
+    sc.delete_project(pj_name)
+
+    user_email = session['user']['email']
+    project_lst = sc.get_user_project(user_email)[user_email]
+    return render_template('my_project.html', project_lst=project_lst)
+
+
 @app.route('/single_post/<project>', methods=['GET', 'POST'])
 def single_post(project):
     """
