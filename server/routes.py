@@ -167,7 +167,7 @@ def my_application():
 @module.login_required
 def apply():
     """
-    Return GET and POST reques from apply page
+    Return GET and POST request from apply page
     """
     project_options = sc.get_projects_names()
 
