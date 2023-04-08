@@ -65,6 +65,18 @@ def rank_for_relation_to_key_work(project_dict, key_word):
     return ret_project_lst
 
 
+def homepage_statistic():
+    """
+    return homepage statistics numbers as dict
+    """
+    homepage_statistic = sc.get_statistic_dict()
+    print(homepage_statistic)
+    if homepage_statistic:
+        return homepage_statistic
+    else:
+        return {"user": '#', "project": '#', "application": '#'}
+
+
 # Decorators
 def login_required(f):
     """

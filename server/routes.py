@@ -42,7 +42,10 @@ def homepage():
     Return homepage with list of projects
     """
     project_lst = module.homepage_form()
-    return render_template('homepage.html', project_lst=project_lst)
+    project_statistic = module.homepage_statistic()
+    return render_template('homepage.html',
+                           project_lst=project_lst,
+                           project_statistic=project_statistic)
 
 
 @app.route('/loginpage')
@@ -63,7 +66,10 @@ def homepage_local():
         return redirect('/manager_homepage')
 
     project_lst = module.homepage_form()
-    return render_template('homepage_local.html', project_lst=project_lst)
+    project_statistic = module.homepage_statistic()
+    return render_template('homepage_local.html',
+                           project_lst=project_lst,
+                           project_statistic=project_statistic)
 
 
 @app.route('/add_project', methods=['GET', 'POST'])

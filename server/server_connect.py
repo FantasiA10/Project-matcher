@@ -40,6 +40,7 @@ PROJECT = 'applied_project'
 APP_DATE = 'application_date'
 RESUME = 'resume'
 TRANSCRIPT = 'transcript'
+STAT = 'statistic'
 
 
 URL = "https://project-finder.herokuapp.com/"
@@ -56,6 +57,7 @@ PROJECT_FILE_ADD = f'/{PROJECTS_NS}/{FILE}/{ADD}'
 PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
 PROJECT_USER = f'/{PROJECTS_NS}/{USER}'
 PROJECT_DELETE = f'/{PROJECTS_NS}/{DELETE}'
+PROJECT_STATISTIC = f'/{PROJECTS_NS}/{STAT}'
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -188,6 +190,17 @@ def add_project(details):
         print(f"Request failed with status code {response.status_code}")
 
 
+def get_statistic_dict():
+    """
+    get statistic result about web from server
+    """
+    response = requests.get(URL+PROJECT_STATISTIC)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
 def delete_project(project_name):
     """
     Allow users to delete their projects
@@ -269,6 +282,7 @@ def get_file(name):
                      attachment_filename=filename,
                      mimetype=file_mimetype
                      )
+
 
 """
 Application
