@@ -1,57 +1,48 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
-import face_recognition
+import os
+from flask import Flask, render_template, request, jsonify
 import base64
-from io import BytesIO
-from PIL import Image
+import face_recognition
 
 app = Flask(__name__)
 
-# Simulate user database
-USER_DATABASE = {
-    # Existing user data
-}
+# 存储已知的面部数据
+known_faces = {}
+
+# 假设已知面部数据存储在 'known_faces' 文件夹中
+face_folder = '/Users/xieshangyu/Documents/GitHub/Project-matcher/web_page_spring/face/known_faces'
+
+for filename in os.listdir(face_folder):
+    img_path = os.path.join(face_folder, filename)
+    img = face_recognition.load_image_file(img_path)
+    encodings = face_recognition.face_encodings(img)
+    if len(encodings) > 0:
+        known_faces[filename] = encodings[0]
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('capture.html')
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-@app.route('/register_user', methods=['POST'])
-def register_user():
+@app.route('/login', methods=['POST'])
+def login():
     data = request.get_json()
+    img_data = data['image'].split(',', 1)[1]
+    img_bytes = base64.b64decode(img_data)
 
-    if not data or "image" not in data or "name" not in data:
-        return jsonify({"success": False, "message": "Image or name data missing"}), 400
+    with open('temp.jpg', 'wb') as f:
+        f.write(img_bytes)
 
-    # Decode image data from Base64
-    image_data = base64.b64decode(data["image"].split(',')[1])
-    image = Image.open(BytesIO(image_data))
-    image = image.convert("RGB")
+    unknown_img = face_recognition.load_image_file('temp.jpg')
+    unknown_encoding = face_recognition.face_encodings(unknown_img)
 
-    # Convert the image to a format that face_recognition library can handle
-    face_image = face_recognition.load_image_file(BytesIO(image_data))
+    if len(unknown_encoding) > 0:
+        unknown_encoding = unknown_encoding[0]
 
-    # Locate facial features in the image
-    face_locations = face_recognition.face_locations(face_image)
-    if not face_locations:
-        return jsonify({"success": False, "message": "No face detected"}), 400
+        for name, encoding in known_faces.items():
+            matches = face_recognition.compare_faces([encoding], unknown_encoding)
+            if True in matches:
+                return jsonify(success=True, name=name)
 
-    # Extract facial features
-    face_encodings = face_recognition.face_encodings(face_image, face_locations)
+    return jsonify(success=False)
 
-    # Save the user's facial features and name in the database
-    user_id = f"user{len(USER_DATABASE) + 1}"
-    USER_DATABASE[user_id] = {
-        "name": data["name"],
-        "face_encoding": face_encodings[0]
-    }
-
-    return jsonify({"success": True, "message": "User registered successfully"})
-
-# Existing login() function
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
