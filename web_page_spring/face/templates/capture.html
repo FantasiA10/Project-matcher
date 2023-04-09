@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+    <style>
+        #preview {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Recognition</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <img id="preview" src="#" alt="captured image preview">
+    <button id="submit">Submit</button>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const snapButton = document.getElementById('snap');
+        const submitButton = document.getElementById('submit');
+        const preview = document.getElementById('preview');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((err) => {
+                console.error("Error accessing camera: ", err);
+            });
+
+        snapButton.addEventListener('click', () => {
+            context.drawImage(video, 0, 0, 640, 480);
+            const dataURL = canvas.toDataURL('image/jpeg');
+            preview.src = dataURL;
+        });
+
+        submitButton.addEventListener('click', async () => {
+            const dataURL = canvas.toDataURL('image/jpeg');
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: dataURL })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert(`Login successful! Welcome, ${data.name}`);
+            } else {
+                alert('Face not recognized. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

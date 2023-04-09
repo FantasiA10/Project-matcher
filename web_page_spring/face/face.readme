@@ -1,0 +1,17 @@
+how to setup environment:
+
+for macos:
+
+conda deactivate
+conda create --name face_recognition_env python=3.9
+conda activate face_recognition_env
+pip install dlib==19.18.0
+pip install face_recognition
+conda install -c anaconda flask
+python app.py
+
+before try your face recognition, please upload a png file of your face photo to the known_face folder
+chrome open:
+http://127.0.0.1:5000/
+
+before try your
