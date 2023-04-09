@@ -8,8 +8,7 @@ app = Flask(__name__)
 # save folder
 known_faces = {}
 
-# save in 'known_faces' folder
-# face_folder = '/Users/xieshangyu/Documents/GitHub/Project-matcher/web_page_spring/face/known_faces'
+# set location
 face_folder = './known_faces'
 
 for filename in os.listdir(face_folder):

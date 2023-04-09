@@ -11,7 +11,9 @@ conda install -c anaconda flask
 python app.py
 
 Before trying the face recognition, please upload a PNG file of your face photo to the "known_faces" folder.
-
+ 
 chrome open:
 http://127.0.0.1:5000/
 
+*use virtual environment!
+*deactivate all virtual environment first!
