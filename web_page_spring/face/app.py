@@ -5,11 +5,12 @@ import face_recognition
 
 app = Flask(__name__)
 
-# 存储已知的面部数据
+# save folder
 known_faces = {}
 
-# 假设已知面部数据存储在 'known_faces' 文件夹中
-face_folder = '/Users/xieshangyu/Documents/GitHub/Project-matcher/web_page_spring/face/known_faces'
+# save in 'known_faces' folder
+# face_folder = '/Users/xieshangyu/Documents/GitHub/Project-matcher/web_page_spring/face/known_faces'
+face_folder = './known_faces'
 
 for filename in os.listdir(face_folder):
     img_path = os.path.join(face_folder, filename)
