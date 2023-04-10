@@ -71,10 +71,8 @@
                             <td><strong> {{application_lst[i].applied_project}} </strong></td>
                             <td> {{application_lst[i].applicant_email}} </td>
                             <td><strong> {{application_lst[i].application_date}} </strong></td>
-                            <td> 
-                                <a> {{application_lst[i].resume}}</a>
-                            </td>
-                            <td>{{application_lst[i].transcript}}</td>
+                            <td> Upcoming soon </td>
+                            <td> Upcoming soon </td>
                             <td>
                                 <!-- Button trigger modal -->
                                     <form action="{{ url_for('delete_apl', apl_name=application_lst[i].application_name)}}" method='post'>
