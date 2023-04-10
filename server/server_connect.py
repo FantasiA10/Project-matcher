@@ -1,6 +1,7 @@
 import requests
 from flask import send_file
 import mimetypes
+import io
 
 LIST = 'list'
 DICT = 'dict'
@@ -274,14 +275,19 @@ def get_file(name):
     """
     get the file for download
     """
-    response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/1')
-    filename = response.headers.get('content-disposition', '').split('"')[-2]
-    file_mimetype, encoding  = mimetypes.guess_type(filename)
-    return send_file(response.content,
-                     as_attachment=True,
-                     attachment_filename=filename,
-                     mimetype=file_mimetype
-                     )
+    response_check = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/0')
+    if "filename" in response_check.json():
+        response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/1')
+        filename = response.headers.get('content-disposition', '').split('=')[-1]
+        file_mimetype, encoding  = mimetypes.guess_type(filename)
+        file_data = io.BytesIO(response.content)
+        return send_file(file_data,
+                         as_attachment=True,
+                         attachment_filename=filename,
+                         mimetype=file_mimetype
+                         )
+    else:
+        return None
 
 
 """

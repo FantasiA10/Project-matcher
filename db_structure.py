@@ -49,7 +49,8 @@ def get_file(name):
     get the file for download
     """
     response = requests.get(URL+PROJECT_GET_FILE+f'/{name}'+'/1')
-    filename = response.headers.get('content-disposition', '').split('"')[-2]
+    filename = response.headers.get('content-disposition', '')#.split('"')[-2]
+    print(filename)
     file_mimetype, encoding  = mimetypes.guess_type(filename)
     return send_file(response.content,
                      as_attachment=True,
