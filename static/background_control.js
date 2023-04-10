@@ -44,6 +44,7 @@ tableOpacity.forEach(element => {
 
 const displayArea = document.querySelectorAll(".margin-left-bot-container");
 const secondDisplayArea = displayArea.item(1)
+const thirdDisplayArea = displayArea.item(2)
 displayArea.forEach(function(displayArea){
   displayArea.addEventListener("mouseover", () => {
     displayArea.lastElementChild.style.opacity = 1;
@@ -54,7 +55,9 @@ displayArea.forEach(function(displayArea){
   displayArea.addEventListener("click", () => {
     if(displayArea==secondDisplayArea){
       window.location.href = "add_project";}
+    else if(displayArea==thirdDisplayArea){
+      window.location.href = "apply";}
     else{
-      window.location.href = "apply";};
+      window.location.href = "homepage_local";};
   });
 });
