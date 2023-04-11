@@ -180,21 +180,22 @@ def apply():
     if request.method == 'GET':
         return render_template('apply.html', project_options=project_options)
     else:
+        string = str(request.form['applied project']) + "_" + str(session['user']["email"])
+        apl_name = "".join(string.split())
+
         apl_details = {
-        'application_name': str(request.form['applied project']) + "_" + str(session['user']["email"]),
-        'applicant_name': request.form['full name'],
-        'applicant_email': session['user']["email"],
-        'applied_project': request.form['applied project'],
-        'application_date': datetime.datetime.today().strftime("%m-%d-%Y"),
-        'transcript': "string",
-        'resume': "string",
-        'application_status': "Pending",
+            'application_name': apl_name,
+            'applicant_name': request.form['full name'],
+            'applicant_email': session['user']["email"],
+            'applied_project': request.form['applied project'],
+            'application_date': datetime.datetime.today().strftime("%m-%d-%Y"),
+            'transcript': "string",
+            'resume': "string",
+            'application_status': "Pending",
         }
         file = request.files.get('file')
-
-        application = str(request.form['applied project']) + "_" + str(session['user']["email"])
         
-        if (sc.application_exist(application)):
+        if (sc.application_exist(apl_name)):
             flash("Error: You have already applied for this project.", "danger")
             return render_template('apply.html', project_options=project_options)
         else:
