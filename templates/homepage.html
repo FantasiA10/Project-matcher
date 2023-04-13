@@ -29,6 +29,7 @@
                     <h5>
                         <span><i>Discover </i></span>
                         <span><i>Projects </i></span>
+                        <span><i>that </i></span>
                         <span><i>Align </i></span>
                         <span><i>with </i></span>
                         <span><i>Your </i></span>
@@ -46,15 +47,15 @@
             <div></div>
             <div class="three-block">
                 <icon><img src="/static/images/icon1.png"></icon>
-                <br><h1>{{project_statistic['user']}} User</h1>
+                <br><h1>{{project_statistic['user']}} User(s)</h1>
             </div>
             <div class="three-block">
                 <icon><img src="/static/images/icon2.png"></icon>
-                <br><h1>{{project_statistic['project']}} Projects</h1>
+                <br><h1>{{project_statistic['project']}} Project(s)</h1>
             </div>
             <div class="three-block">
                 <icon><img src="/static/images/icon3.png"></icon>
-                <br><h1>{{project_statistic['application']}} Applications</h1>
+                <br><h1>{{project_statistic['application']}} Application(s)</h1>
             </div>
             <div></div>
         </div>
@@ -65,7 +66,7 @@
             <display-area>
                 <div class="margin-left-bot-container">
                     <sub-title-text>Browse Projects</sub-title-text>
-                    <p-text> <br>that matches your interests <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
+                    <p-text> <br>that match your interests <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
                 </div>
             </display-area>
             <display-area style="background:black; background-size: cover;">
@@ -77,7 +78,7 @@
             <display-area>
                 <div class="margin-left-bot-container">
                     <sub-title-text>Send Application</sub-title-text>
-                    <p-text> <br>to a current project <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
+                    <p-text> <br>for a current project <img src="static/images/arrow.png" width="45" height="22"alt=""></p-text>
                 </div>
             </display-area>
         </div>
@@ -97,6 +98,7 @@
                       <tr>
                           <th> ID
                           <th> Project Name
+                          <th> 
                           <th> Sponsor
                           <th> Department
                           <th> Project Status
@@ -115,7 +117,8 @@
                             </strong></td>
                             
 
-                            <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
+                            <td> <img src="static/images/steven.jpg" alt=""> </td>
+                            <td> {{project_lst[i].account.name}} </td>
                             <td> {{project_lst[i].department_name}} </td>
                             <td>
                             <p class="status delivered">OPEN</p>
