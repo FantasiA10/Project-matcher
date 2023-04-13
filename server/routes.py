@@ -78,8 +78,11 @@ def add_project():
     """
     Return GET and POST reques from add project page
     """
+
+    department_options = sc.get_departments()
+
     if request.method == 'GET':
-        return render_template('add_project.html')
+        return render_template('add_project.html', department_options = department_options)
     project_details = {
       'name': request.form['name'],
       'account': session['user'],

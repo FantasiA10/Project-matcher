@@ -42,6 +42,7 @@ APP_DATE = 'application_date'
 RESUME = 'resume'
 TRANSCRIPT = 'transcript'
 STAT = 'statistic'
+DEPART = 'departments'
 
 
 URL = "https://project-finder.herokuapp.com/"
@@ -59,6 +60,7 @@ PROJECT_GET_FILE = f'/{PROJECTS_NS}/{FILE}/{GET}'
 PROJECT_USER = f'/{PROJECTS_NS}/{USER}'
 PROJECT_DELETE = f'/{PROJECTS_NS}/{DELETE}'
 PROJECT_STATISTIC = f'/{PROJECTS_NS}/{STAT}'
+PROJECT_DEPART = f'/{PROJECTS_NS}/{DEPART}'
 
 USER_DICT = f'/{DICT}'
 USER_DETAILS = f'/{USERS_NS}/{DETAILS}'
@@ -351,5 +353,16 @@ def delete_application(application_name):
     response = requests.post(URL+APPLICATION_DELETE+f'/{application_name}')
     if response.status_code == 200:
         return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def get_departments():
+    """
+    Return a list of departments. This is used for the dropdown memu in the add project form.
+    """
+    response = requests.get(URL+PROJECT_DEPART)
+    if response.status_code == 200:
+        return response.json()["departments"]
     else:
         print(f"Request failed with status code {response.status_code}")

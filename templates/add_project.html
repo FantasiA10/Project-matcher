@@ -78,14 +78,15 @@
             <label for="name">Project Name</label>
             <input type="text" name="name" class="field" required>
 
-            <label for="depart">Deparment</label>
-            <select name="depart" class="field" required>
-              <option value="" disabled selected hidden>Select a field</option>
-              <option value="Computer Scinece and Engineering">Computer Scinece and Engineering</option>
-              <option value="Chemical and Biomolecular Engineering">Chemical and Biomolecular Engineering</option>
-              <option value="Civil and Urban Engineering">Civil and Urban Engineering</option>
-              <option value="Finance and Risk Engineering">Finance and Risk Engineering</option>
-              <option value="Other">Other</option>
+            <label for="depart">Department</label>
+            <select id="select" name="department" class="field">
+                <option value="default">Select a Department</option>
+                  
+                {% for option in department_options %}
+                <option>
+                    {{ option }}
+                </option>
+                    {% endfor %}
             </select>
 
             <label for="member need">No. of Member Needed</label>
