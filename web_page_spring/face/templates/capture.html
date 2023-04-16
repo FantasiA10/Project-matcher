@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Recognition</title>
+    <title>{{ title }}</title>
     <style>
         #preview {
             max-width: 100%;
@@ -13,12 +13,21 @@
     </style>
 </head>
 <body>
-    <h1>Face Recognition</h1>
+    <h1>{{ title }}</h1>
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
     <img id="preview" src="#" alt="captured image preview">
-    <button id="submit">Submit</button>
+    <form id="captureForm" method="post" action="{{ action }}">
+        <input type="hidden" id="image" name="image">
+        {% if title == 'Register' %}
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        {% endif %}
+        <br>
+        <input type="submit" value="{{ title }}" id="submit">
+    </form>
 
     <script>
         const video = document.getElementById('video');
@@ -27,6 +36,7 @@
         const snapButton = document.getElementById('snap');
         const submitButton = document.getElementById('submit');
         const preview = document.getElementById('preview');
+        const imageInput = document.getElementById('image');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then((stream) => {
@@ -40,21 +50,25 @@
             context.drawImage(video, 0, 0, 640, 480);
             const dataURL = canvas.toDataURL('image/jpeg');
             preview.src = dataURL;
+            imageInput.value = dataURL;
         });
 
-        submitButton.addEventListener('click', async () => {
-            const dataURL = canvas.toDataURL('image/jpeg');
-            const response = await fetch('/login', {
+        const captureForm = document.getElementById('captureForm');
+        captureForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(captureForm);
+            const response = await fetch(captureForm.action, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ image: dataURL })
+                body: formData
             });
 
             const data = await response.json();
             if (data.success) {
-                alert(`Login successful! Welcome, ${data.name}`);
+                if (captureForm.action.includes('login')) {
+                    alert(`Login successful! Welcome, ${data.name}`);
+                } else {
+                    alert('Registration successful!');
+                }
             } else {
                 alert('Face not recognized. Please try again.');
             }

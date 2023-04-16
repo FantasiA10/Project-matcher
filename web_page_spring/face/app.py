@@ -20,12 +20,11 @@ for filename in os.listdir(face_folder):
 
 @app.route('/')
 def index():
-    return render_template('capture.html')
+    return render_template('capture.html', title='Login', action='/login')
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    img_data = data['image'].split(',', 1)[1]
+    img_data = request.form['image'].split(',', 1)[1]
     img_bytes = base64.b64decode(img_data)
 
     with open('temp.jpg', 'wb') as f:
@@ -44,28 +43,28 @@ def login():
 
     return jsonify(success=False)
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register')
 def register():
-    if request.method == 'POST':
-        img_data = request.form['image'].split(',', 1)[1]
-        img_bytes = base64.b64decode(img_data)
-        name = request.form['name']
+    return render_template('capture.html', title='Register', action='/register')
 
-        # Save the image to known_faces folder
-        img_path = os.path.join(face_folder, f'{name}.jpg')
-        with open(img_path, 'wb') as f:
-            f.write(img_bytes)
+@app.route('/register_user', methods=['POST'])
+def register_user():
+    img_data = request.form['image'].split(',', 1)[1]
+    img_bytes = base64.b64decode(img_data)
+    name = request.form['name']
 
-        # Load the image and save its encoding to known_faces dictionary
-        img = face_recognition.load_image_file(img_path)
-        encodings = face_recognition.face_encodings(img)
-        if len(encodings) > 0:
-            known_faces[name] = encodings[0]
+    # Save the image to known_faces folder
+    img_path = os.path.join(face_folder, f'{name}.jpg')
+    with open(img_path, 'wb') as f:
+        f.write(img_bytes)
 
-        return jsonify(success=True)
+    # Load the image and save its encoding to known_faces dictionary
+    img = face_recognition.load_image_file(img_path)
+    encodings = face_recognition.face_encodings(img)
+    if len(encodings) > 0:
+        known_faces[name] = encodings[0]
 
-    return render_template('register.html')
-
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
