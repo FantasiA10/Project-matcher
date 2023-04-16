@@ -2,71 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 </head>
 <body>
     <h1>Register</h1>
-    <form>
+    <form id="registerForm" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <br>
-        <label for="camera">Take a photo:</label>
-        <input type="file" id="camera" name="camera" accept="image/*" capture="user" required>
+        <input type="hidden" id="image" name="image">
+        <video id="video" width="640" height="480" autoplay></video>
+        <button id="snap">Snap Photo</button>
+        <canvas id="canvas" width="640" height="480"></canvas>
         <br>
         <input type="submit" value="Register">
     </form>
 
     <script>
-        document.querySelector('form').addEventListener('submit', async (event) => {
-            event.preventDefault();
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const snapButton = document.getElementById('snap');
+        const imageInput = document.getElementById('image');
 
-            const name = document.getElementById('name').value.trim();
-            if (!name) {
-                alert('Please enter a name');
-                return;
-            }
-
-            const cameraInput = document.getElementById('camera');
-            if (!cameraInput.files.length) {
-                alert('Please take a photo');
-                return;
-            }
-
-            const imageFile = cameraInput.files[0];
-            const imageDataUrl = await readFileAsDataURL(imageFile);
-
-            const response = await fetch('/register_user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image: imageDataUrl, name: name }),
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
             });
 
-            const responseData = await response.json();
-            if (responseData.success) {
-                alert(responseData.message);
-                location.href = '/';
-            } else {
-                alert(responseData.message);
-            }
+        snapButton.addEventListener('click', e => {
+            e.preventDefault();
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            imageInput.value = canvas.toDataURL('image/jpeg');
         });
-
-        function readFileAsDataURL(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    resolve(event.target.result);
-                };
-                reader.onerror = (error) => {
-                    reject(error);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-
     </script>
 </body>
 </html>
