@@ -27,7 +27,11 @@
           <div class="card">
           <div class = "avatar-box">
             <!-- <img src ="my-avatar.png" , width="120"> -->
-            <img class="rounded-circle account-img" src="{{ image_file }}" width="120" >
+            {%if image_type%}
+              <img class="rounded-circle account-img" src="data:{{ image_type }};base64,{{ image_file }}" alt="{{ image_file }}" width="120" >
+            {%else%}
+              <img class="rounded-circle account-img" src="{{ image_file }}" width="120" >
+            {%endif%}
           </div>
             <header>
               <h2>NAME</h2>

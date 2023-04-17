@@ -2,6 +2,7 @@ import requests
 from flask import send_file
 import mimetypes
 import io
+import base64
 
 LIST = 'list'
 DICT = 'dict'
@@ -71,6 +72,7 @@ USER_ADD = f'/{USERS_NS}/{ADD}'
 USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
 USER_UPDATE_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{UPDATE}'
+USER_GET_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{GET}'
 
 APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
@@ -299,7 +301,7 @@ def update_profile_pic(profile_detail):
     """
     update a person profile picture
     """
-    email = profile_detail['name']
+    email = profile_detail['user_email']
     file_name = profile_detail['filename']
     file_data = {'file': (file_name, profile_detail['filedata'])}
     response_post = requests.post(URL + USER_UPDATE_PROFILE_PIC + f'/{email}' +
@@ -308,6 +310,20 @@ def update_profile_pic(profile_detail):
         return {MESSAGE: 'Profile Picture Changed.'}
     else:
         print(f"Request failed with status code {response_post.status_code}")
+
+
+def get_profile_pic(email):
+    """
+    get user picture from server
+    """
+    response = requests.get(URL+USER_GET_PROFILE_PIC+f'/{email}')
+    if response.status_code == 200:
+        if 'application/json' not in response.headers.get('Content-Type'):
+            filename = response.headers.get('content-disposition', '').split('=')[-1]
+            file_mimetype, encoding  = mimetypes.guess_type(filename)
+            file_data = base64.b64encode(response.content).decode('utf-8')
+            return file_mimetype, file_data
+    return None, None
 
 
 """

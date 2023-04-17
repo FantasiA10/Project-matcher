@@ -248,10 +248,18 @@ def get_css_file(css_file):
 @module.login_required
 def account():
     """
-    todo
+    load account page
     """
-    image_file = url_for('static', filename='images/' + 'steven.jpg')
-    return render_template('account.html', title='Account', image_file=image_file)
+    pic_type, pic_data = sc.get_profile_pic(session['user']['email'])
+    if pic_type:
+        return render_template('account.html', title='Account',
+                               image_file=pic_data,
+                               image_type=pic_type)
+    else:
+        image_file = url_for('static', filename='images/' + 'steven.jpg')
+        return render_template('account.html', title='Account',
+                               image_file=image_file,
+                               image_type=None)
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])
@@ -317,7 +325,7 @@ def team():
     return render_template("team.html")
 
 
-@app.route('/profile_pic_upload')
+@app.route('/profile_pic_upload', methods=['GET', 'POST'])
 def upload_image():
     """
     upload a person profile picture to server
@@ -331,7 +339,7 @@ def upload_image():
             'filedata': file_contents,
         }
         sc.update_profile_pic(profile_detail)
-    return render_template('upload.html')
+    return redirect('/account')
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
