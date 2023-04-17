@@ -196,7 +196,6 @@ def apply():
             'resume': "string",
             'application_status': "Pending",
         }
-        file = request.files.get('file')
         
         if (sc.application_exist(apl_name)):
             flash("Error: You have already applied for this project.", "danger")
@@ -318,11 +317,20 @@ def team():
     return render_template("team.html")
 
 
-@app.route('/upload')
+@app.route('/profile_pic_upload')
 def upload_image():
     """
-    Todo
+    upload a person profile picture to server
     """
+    file = request.files.get('file')
+    if file:
+        file_contents = file.read()
+        profile_detail = {
+            'user_email':  session['user']['email'],
+            'filename': file.filename,
+            'filedata': file_contents,
+        }
+        sc.update_profile_pic(profile_detail)
     return render_template('upload.html')
 
 @app.route('/', methods=['GET', 'POST'])

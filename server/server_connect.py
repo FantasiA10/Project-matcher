@@ -43,6 +43,8 @@ RESUME = 'resume'
 TRANSCRIPT = 'transcript'
 STAT = 'statistic'
 DEPART = 'departments'
+PROFILE = 'profile'
+UPDATE = 'update'
 
 
 URL = "https://project-finder.herokuapp.com/"
@@ -68,6 +70,7 @@ USER_LIST = f'/{USERS_NS}/{LIST}'
 USER_ADD = f'/{USERS_NS}/{ADD}'
 USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
+USER_UPDATE_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{UPDATE}'
 
 APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
@@ -292,9 +295,25 @@ def get_file(name):
         return None
 
 
+def update_profile_pic(profile_detail):
+    """
+    update a person profile picture
+    """
+    email = profile_detail['name']
+    file_name = profile_detail['filename']
+    file_data = {'file': (file_name, profile_detail['filedata'])}
+    response_post = requests.post(URL + USER_UPDATE_PROFILE_PIC + f'/{email}' +
+                                  f'/{file_name}', files=file_data)
+    if response_post.status_code == 200:
+        return {MESSAGE: 'Profile Picture Changed.'}
+    else:
+        print(f"Request failed with status code {response_post.status_code}")
+
+
 """
 Application
 """
+
 
 def get_application_details(application):
     response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')
