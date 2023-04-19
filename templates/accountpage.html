@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <title>My Account - Rahul Nikam</title>
+        
+        <!-- Our CSS -->
+        <link rel="stylesheet" href="/static/responsive.css">
+        <link rel="shortcut icon" href="/static/images/Rahul Nikam.jpg" type="image/x-icon">
+        <link rel="stylesheet" href="/static/style1.css">
+
+        <link rel="stylesheet" href="/static/style.css">
+
+        <title>Home</title>
+            <div id="header" class="left">
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+                <a href="{{url_for('apply') }}" class="btn">Apply</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="/user/signout" class="btn">Sign Out</a>
+            </div>
+
+
+        
+          
+        </head>
+
+
+
+<body>
+    <section>
+        <div class="account-Menu">
+            <div class="account-Menu-sect-items">
+                <button>Account</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="second-section">
+        <div class="main-account-page-content">
+            <div class="sec-right">
+                
+                <div class="sect-items">
+                    <div class="big-header">
+                        <div class="left">
+                            <div class="logo">
+                                <h1>{{ session['user']['name'] }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="accountItem">Account</p>
+                    <p id="notificationItem">Notifications</p>
+                    <p id="passwordItem">Password</p>
+                    <p>Logout</p>
+                </div>
+            </div>
+
+
+
+<!-- Account Section -->
+            <div class="sect-left" id="accountSection">
+                <div class="dect-left-heading-1">
+                    <h1>Account</h1>
+                </div>
+                <div class="sect-left-avatar-2">
+                    <div class="sect-left-avatar-img">
+                        <div class = "avatar-box">
+                            {%if image_type%}
+                              <img class="rounded-circle account-img" src="data:{{ image_type }};base64,{{ image_file }}" alt="{{ image_file }}">
+                            {%else%}
+                              <img class="rounded-circle account-img" src="{{ image_file }}" >
+                            {%endif%}
+                        </div>
+                    </div>
+
+                    <div class="form-2">
+                        <div class="name-bio">
+                            <p class="user-name" id="userNameAccount">
+                                <strong>Name:</strong> {{ session['user']['name'] }}<br>
+                                <strong>Phone:</strong> {{ session['user']['phone'] }}<br>
+                                <strong>Email:</strong> {{ session['user']['email'] }}<br>
+                            </p>
+
+                            <p>
+                                We use this to let you populate your profile in informatin on our Website
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr size="1px" style="margin: 30px 20px 10px 20px;">
+                    
+                    <div class="last-sect">
+                        
+                        <form action = "/profile_pic_upload" method = "POST" 
+                        enctype = "multipart/form-data">
+                            <div class="headings">
+                                <h1>Upload Image</h1>
+                                <p>Upload a new profile photo</p>
+                            </div><br>
+                            <input  type = "file" name = "file"/>
+                            <br></br>
+                            <input  style=" width: 100px;" class="logout-btn" type = "submit" class="btns" value="Upload"/>
+                                 
+                        </form>  
+                    </div>
+                        
+
+
+
+                </div>
+                
+                    
+                        
+                    
+                <hr size="1px" style="margin: 30px 0px 10px 0px;">
+
+                <div class="account-edit-form-5">
+                    <form action="a.js" class="acc-edit-frm">
+                        <div class="headings">
+                            <h1>Edit Profile</h1>
+                            <p>Use this to update your information on our Website</p>
+                        </div>
+
+                        <div class="form-1">
+                            <div class="inner-form-1">
+                                <p>Name</p>
+                                <input type="text">
+                            </div>
+                            <div class="inner-form-2">
+                                <p>Email</p>
+                                <input type="email">
+                            </div>
+                        </div>
+                        <div class="form-2">
+                            <div class="inner-form-2-1">
+                                <p>Phone</p>
+                                <input type="phone">
+                            </div>
+                            <div class="inner-form-2-2">
+                                <p>Bio</p>
+                                <input type="text" id="userBioInput" required>
+                                </div>
+                            </div>
+                            <div class="save-btn">
+                                <input type="submit" value="Save Changes" class="save-bbtn" id="saveProfile">
+                            </div>
+                            
+
+                            <hr style="margin: 40px 0px 25px 0px;">
+                            <div class="last-sect">
+                                <div class="left-del-sect">
+                                    <h1>Delete Account</h1>
+                                    <p>By deleting yor accound you will lose all yopur data.</p>
+                                </div>
+                                
+                                <p style="color:red">Delete Account...</p>
+                            </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- Structure for Notification section -->
+
+            <div class="sect-left" id="notificationSection">
+                <div class="dect-left-heading-1">
+                    <h1>Notification</h1>
+                </div>
+                <div class="notification-msg">
+                    <p>Do you want GaavShahar to send you Notification on your Phone Number, Email, Whatsapp.</p>
+                    <h4>Why we do this?</h4> 
+                    <p>
+                        Whenever we add new Products or when we launch any offers on our Website we would love to Notify our users about that and this is the reason that GaavShahar can send you Notifications.
+                        If you want to receive Notifications form GaavShahar than please tick the Options give below.
+                    </p>
+                    <div class="Notification-buttons">
+                        <Button>
+                            Send Us Notifications
+                        </Button>
+                        <p>
+                            Don't Send Us Notifications...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Ends here -->
+
+
+           
+        </div>
+    </section>
+    <section>
+        <div class="main-account-page-content-mobile" id="mobileAccMenuSection">
+            <div class="sec-right-mobile">
+                <div class="sect-heading-mobile">
+                    <img src="/static/images/close-outline.svg" alt="" id="accMenuCross">
+                </div>
+                <div class="sect-items-mobile">
+                    <p id="accountItemMobile">Account</p>
+                    <p id="notificationItemMobile">Notifications</p>
+                    <p id="passwordItemMobile">Password</p>
+                    <p id="integrationsItemMobile">Integrations</p>
+                    <p id="socailProfilesItemMobile">Socail Profiles</p>
+                    <p id="logOutItemMobile">LogOut</p>
+                </div>
+            </div>
+    </section>
+
+<script src="/static/account.js"></script>
+
+
+</body>
+
+</html>

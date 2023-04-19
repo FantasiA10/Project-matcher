@@ -252,12 +252,12 @@ def account():
     """
     pic_type, pic_data = sc.get_profile_pic(session['user']['email'])
     if pic_type:
-        return render_template('account.html', title='Account',
+        return render_template('accountpage.html', title='Account',
                                image_file=pic_data,
                                image_type=pic_type)
     else:
         image_file = url_for('static', filename='images/' + 'steven.jpg')
-        return render_template('account.html', title='Account',
+        return render_template('accountpage.html', title='Account',
                                image_file=image_file,
                                image_type=None)
 
