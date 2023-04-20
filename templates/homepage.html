@@ -21,6 +21,40 @@
                 <a href="{{url_for('account') }}" class="btn">Account</a>
                 <a href="{{url_for('loginpage')}}" class="round-button">login</a>
             </div>
+        <style>
+        /* Inline CSS for the project boxes */
+            .form {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-gap: 20px;
+            }
+
+            .form-box {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border: 1px solid #57068c;
+                padding: 20px;
+                height: 150px;
+            }
+
+            .form-image {
+                width: 100px;
+                height: 100px;
+                margin-right: 20px;
+            }
+
+            .form-label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 5px;
+                font-size: 16px;
+            }
+        </style>
     </head>
     <body>
         <div>
@@ -94,7 +128,7 @@
           </section>
           <section class="table__body">
               <table>
-                  <thead>
+                  <!-- <thead>
                       <tr>
                           <th> ID
                           <th> Project Name
@@ -105,7 +139,12 @@
                           <th> Posted Date
                           <th> 
                       </tr>
-                  </thead>
+                  </thead> -->
+
+
+                  <!-- add here -->
+
+                  
                   <tbody>
                         {% for i in range(project_lst |length)%}
                         <tr>
