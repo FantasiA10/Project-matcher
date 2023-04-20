@@ -87,7 +87,7 @@ def add_project():
       'name': request.form['name'],
       'account': session['user'],
       'num_members': request.form['member number'],
-      'department_name': request.form['depart'],
+      'department_name': request.form['department'],
       'major_requirements': request.form['major'],
       'school_year': request.form['school year'],
       'GPA': request.form['gpa'],
