@@ -2,6 +2,7 @@ import requests
 from flask import send_file
 import mimetypes
 import io
+import base64
 
 LIST = 'list'
 DICT = 'dict'
@@ -43,6 +44,8 @@ RESUME = 'resume'
 TRANSCRIPT = 'transcript'
 STAT = 'statistic'
 DEPART = 'departments'
+PROFILE = 'profile'
+UPDATE = 'update'
 
 
 URL = "https://project-finder.herokuapp.com/"
@@ -68,6 +71,9 @@ USER_LIST = f'/{USERS_NS}/{LIST}'
 USER_ADD = f'/{USERS_NS}/{ADD}'
 USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
+USER_UPDATE_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{UPDATE}'
+USER_GET_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{GET}'
+USER_DELETE = f'/{USERS_NS}/{DELETE}'
 
 APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
@@ -118,6 +124,17 @@ def user_signup(details):
     response = requests.post(URL+USER_SIGNUP, json=details)
     if response.status_code == 200:
         return {MESSAGE: 'User created.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def delete_user(user_email):
+    """
+    Delete an account in db
+    """
+    response = requests.post(URL+USER_DELETE+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 
@@ -292,9 +309,39 @@ def get_file(name):
         return None
 
 
+def update_profile_pic(profile_detail):
+    """
+    update a person profile picture
+    """
+    email = profile_detail['user_email']
+    file_name = profile_detail['filename']
+    file_data = {'file': (file_name, profile_detail['filedata'])}
+    response_post = requests.post(URL + USER_UPDATE_PROFILE_PIC + f'/{email}' +
+                                  f'/{file_name}', files=file_data)
+    if response_post.status_code == 200:
+        return {MESSAGE: 'Profile Picture Changed.'}
+    else:
+        print(f"Request failed with status code {response_post.status_code}")
+
+
+def get_profile_pic(email):
+    """
+    get user picture from server
+    """
+    response = requests.get(URL+USER_GET_PROFILE_PIC+f'/{email}')
+    if response.status_code == 200:
+        if 'application/json' not in response.headers.get('Content-Type'):
+            filename = response.headers.get('content-disposition', '').split('=')[-1]
+            file_mimetype, encoding  = mimetypes.guess_type(filename)
+            file_data = base64.b64encode(response.content).decode('utf-8')
+            return file_mimetype, file_data
+    return None, None
+
+
 """
 Application
 """
+
 
 def get_application_details(application):
     response = requests.get(URL+APPLICATION_DETAILS+f'/{application}')

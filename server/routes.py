@@ -87,7 +87,7 @@ def add_project():
       'name': request.form['name'],
       'account': session['user'],
       'num_members': request.form['member number'],
-      'department_name': request.form['depart'],
+      'department_name': request.form['department'],
       'major_requirements': request.form['major'],
       'school_year': request.form['school year'],
       'GPA': request.form['gpa'],
@@ -196,7 +196,6 @@ def apply():
             'resume': "string",
             'application_status': "Pending",
         }
-        file = request.files.get('file')
         
         if (sc.application_exist(apl_name)):
             flash("Error: You have already applied for this project.", "danger")
@@ -249,10 +248,30 @@ def get_css_file(css_file):
 @module.login_required
 def account():
     """
-    todo
+    load account page
     """
-    image_file = url_for('static', filename='images/' + 'steven.jpg')
-    return render_template('account.html', title='Account', image_file=image_file)
+    pic_type, pic_data = sc.get_profile_pic(session['user']['email'])
+    if pic_type:
+        return render_template('accountpage.html', title='Account',
+                               image_file=pic_data,
+                               image_type=pic_type)
+    else:
+        image_file = url_for('static', filename='images/' + 'steven.jpg')
+        return render_template('accountpage.html', title='Account',
+                               image_file=image_file,
+                               image_type=None)
+
+
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    user_email = session['user']['email']
+    sc.delete_user(user_email)
+ 
+    project_lst = module.homepage_form()
+    project_statistic = module.homepage_statistic()
+    return render_template('homepage.html',
+                           project_lst=project_lst,
+                           project_statistic=project_statistic)
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])
@@ -318,12 +337,21 @@ def team():
     return render_template("team.html")
 
 
-@app.route('/upload')
+@app.route('/profile_pic_upload', methods=['GET', 'POST'])
 def upload_image():
     """
-    Todo
+    upload a person profile picture to server
     """
-    return render_template('upload.html')
+    file = request.files.get('file')
+    if file:
+        file_contents = file.read()
+        profile_detail = {
+            'user_email':  session['user']['email'],
+            'filename': file.filename,
+            'filedata': file_contents,
+        }
+        sc.update_profile_pic(profile_detail)
+    return redirect('/account')
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
