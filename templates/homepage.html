@@ -23,37 +23,31 @@
             </div>
         <style>
         /* Inline CSS for the project boxes */
-            .form {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                grid-gap: 20px;
-            }
+        .form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
 
-            .form-box {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                border: 1px solid #57068c;
-                padding: 20px;
-                height: 150px;
-            }
+        .form-box {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            height: 150px;
+        }
 
-            .form-image {
-                width: 100px;
-                height: 100px;
-                margin-right: 20px;
-            }
+        .form-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
 
-            .form-label {
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-
-            .form-input {
-                width: 100%;
-                padding: 5px;
-                font-size: 16px;
-            }
+      .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+      }
         </style>
     </head>
     <body>
@@ -118,7 +112,7 @@
         </div>
     <br><br><br>
     <table-opacity>
-      <main class="table">
+      <main>
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
               <form class="input-group" method = "POST" action = "/homepage_search">
@@ -126,8 +120,8 @@
                   <img src="static/images/search.png" alt="">
               </form>
           </section>
-          <section class="table__body">
-              <table>
+          <!-- <section class="table__body"> -->
+              <!-- <table> -->
                   <!-- <thead>
                       <tr>
                           <th> ID
@@ -143,9 +137,43 @@
 
 
                   <!-- add here -->
+                  {% for i in range(project_lst |length)%}
+                  <tr>
+                        <div class="form">
+                            <div class="form-box">
+                                <!-- <td> {{i+1}} </td> -->
+                                <div>
+                                    <img class="form-image" src="https://via.placeholder.com/100">
+
+                                     <lable class="form-label" href="{{url_for('single_post', project = project_lst[i].name)}}">
+                                        {{project_lst[i].name}}
+                                    </lable><br>
+                                    <br>
+                                    <lable class="form-label"> {{project_lst[i].account.name}} </lable><br>
+                                    <lable class="form-label"> {{project_lst[i].department_name}} </lable><br>
+                                    <!-- <t>
+                                    <p class="status delivered">OPEN</p>
+                                    </td> -->
+                                    <lable class="form-label"> {{project_lst[i].post_date}}</lable><br>
+
+
+                                    <lable>
+                                        <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="form-label">
+                                            View More</a>
+                                    </lable>
+                                </div>
+        
+                            </div>
+                        </div>
+                    {%endfor%}
+                    </tr>
+                        
+
+                    </div>
+                  </div>
 
                   
-                  <tbody>
+                  <!-- <tbody>
                         {% for i in range(project_lst |length)%}
                         <tr>
                             <td> {{i+1}} </td>
@@ -171,9 +199,9 @@
                                 </td>
                         {%endfor%}
                         </tr>
-                  </tbody>
-              </table>
-          </section>
+                  </tbody> -->
+              <!-- </table> -->
+          <!-- </section> -->
       </main>
     </table-opacity>
   </body>
