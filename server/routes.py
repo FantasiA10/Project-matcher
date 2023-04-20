@@ -185,7 +185,9 @@ def apply():
     else:
         string = str(request.form['applied project']) + "_" + str(session['user']["email"])
         apl_name = "".join(string.split())
-
+        resume_file = request.files.get('resume')
+        transcript_file = request.files.get('transcript')
+        coverletter_file = request.files.get('coverletter')
         apl_details = {
             'application_name': apl_name,
             'applicant_name': request.form['full name'],
@@ -195,8 +197,13 @@ def apply():
             'transcript': "string",
             'resume': "string",
             'application_status': "Pending",
+            'resume_filename': resume_file.filename if resume_file else None,
+            'resume_content': resume_file.read() if resume_file else None,
+            'transcript_filename': transcript_file.filename if transcript_file else None,
+            'transcript_content': transcript_file.read() if transcript_file else None,
+            'coverletter_filename': coverletter_file.filename if coverletter_file else None,
+            'coverletter_content': coverletter_file.read() if coverletter_file else None
         }
-        
         if (sc.application_exist(apl_name)):
             flash("Error: You have already applied for this project.", "danger")
             return render_template('apply.html', project_options=project_options)
