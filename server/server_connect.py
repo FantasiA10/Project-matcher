@@ -74,6 +74,7 @@ USER_SIGNUP = f'/{USERS_NS}/signup'
 USER_UPDATE_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{UPDATE}'
 USER_GET_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{GET}'
 USER_DELETE = f'/{USERS_NS}/{DELETE}'
+USER_UPDATE = f'/{USERS_NS}/{UPDATE}'
 
 APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
@@ -133,6 +134,17 @@ def delete_user(user_email):
     Delete an account in db
     """
     response = requests.post(URL+USER_DELETE+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def update_user(details):
+    """
+    Update an account
+    """
+    response = requests.post(URL+USER_UPDATE, json=details)
     if response.status_code == 200:
         return response.json()
     else:

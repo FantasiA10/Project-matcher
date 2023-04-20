@@ -92,8 +92,8 @@
                     <div class="form-2">
                         <div class="name-bio">
                             <p class="user-name" id="userNameAccount">
-                                <strong>Name:</strong> {{ session['user']['name'] }}<br>
-                                <strong>Phone:</strong> {{ session['user']['phone'] }}<br>
+                                <strong>Name:</strong> {{name}} <br>
+                                <strong>Phone:</strong> {{phone}} <br>
                                 <strong>Email:</strong> {{ session['user']['email'] }}<br>
                             </p>
 
@@ -131,37 +131,37 @@
                 <hr size="1px" style="margin: 40px 0px 40px 0px;">
 
                 <div class="account-edit-form-5">
-                    <form action="a.js" class="acc-edit-frm">
-                        <div class="headings">
+                    <form class="acc-edit-frm" action="{{ url_for('update_user')}}" enctype="multipart/form-data" method="post">
+                        <div class="headings">  
                             <h1>Edit Info</h1>
                             <p>Please make use of the form provided below to update your information.</p>
                         </div>
 
                         <div class="form-1">
                             <div class="inner-form-1">
-                                <p>Name</p>
-                                <input type="text" required>
+                                <p><label for="name">Name </label></p>
+                                <input type="text" name="name" required>
                             </div>
                             <div class="inner-form-2">
-                                <p>Email</p>
-                                <input type="email" required>
+                                <p><label for="email">Email </label></p>
+                                <input type="email" name="email" value="{{ session['user']['email'] }}" readonly>
                             </div>
                         </div>
                         <div class="form-2">
                             <div class="inner-form-2-1">
-                                <p>Phone</p>
-                                <input type="phone" required>
+                                <p><label for="phone">Phone </label></p>
+                                <input type="phone" name="phone" required>
                             </div>
                             <div class="inner-form-2-2">
-                                <p>Password</p>
-                                <input type="text" required>
+                                <p><label for="password">Password </label></p>
+                                <input type="text" name="password" required>
                                 </div>
                             </div>
 
                             <div class="save-btn">
-                                <input type="submit" value="Save Changes" class="save-bbtn" id="saveProfile">
+                                <input type="submit" value="Save Changes" class="save-bbtn" >
                             </div>
-                        </form>
+                    </form>
                             
 
                         <hr style="margin: 40px 0px 25px 0px;">

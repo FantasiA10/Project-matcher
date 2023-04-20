@@ -257,16 +257,24 @@ def account():
     """
     load account page
     """
-    pic_type, pic_data = sc.get_profile_pic(session['user']['email'])
+    email = session['user']['email']
+    name = sc.get_user_details(email)['name']
+    phone = sc.get_user_details(email)['phone']
+
+    pic_type, pic_data = sc.get_profile_pic(email)
     if pic_type:
         return render_template('accountpage.html', title='Account',
                                image_file=pic_data,
-                               image_type=pic_type)
+                               image_type=pic_type,
+                               name = name,
+                               phone = phone)
     else:
         image_file = url_for('static', filename='images/' + 'steven.jpg')
         return render_template('accountpage.html', title='Account',
                                image_file=image_file,
-                               image_type=None)
+                               image_type=None,
+                               name = name,
+                               phone = phone)
 
 
 @app.route('/delete_user', methods=['POST'])
@@ -274,11 +282,19 @@ def delete_user():
     user_email = session['user']['email']
     sc.delete_user(user_email)
  
-    project_lst = module.homepage_form()
-    project_statistic = module.homepage_statistic()
-    return render_template('homepage.html',
-                           project_lst=project_lst,
-                           project_statistic=project_statistic)
+    return redirect('/')
+
+
+@app.route('/update_user', methods=['POST'])
+def update_user():
+    user_details = {
+      'name': request.form['name'],
+      'email': request.form['email'],
+      'phone': request.form['phone'],
+      'password': request.form['password'],
+    }
+    sc.update_user(user_details)
+    return redirect('/account')
 
 
 @app.route("/manager_homepage", methods=['GET', 'POST'])
