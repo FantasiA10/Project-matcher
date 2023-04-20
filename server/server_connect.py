@@ -73,6 +73,7 @@ USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
 USER_UPDATE_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{UPDATE}'
 USER_GET_PROFILE_PIC = f'/{USERS_NS}/{PROFILE}/{GET}'
+USER_DELETE = f'/{USERS_NS}/{DELETE}'
 
 APPLICATION_DICT = f'/{APPLICATIONS_NS}/{DICT}'
 APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
@@ -123,6 +124,17 @@ def user_signup(details):
     response = requests.post(URL+USER_SIGNUP, json=details)
     if response.status_code == 200:
         return {MESSAGE: 'User created.'}
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+
+def delete_user(user_email):
+    """
+    Delete an account in db
+    """
+    response = requests.post(URL+USER_DELETE+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
 

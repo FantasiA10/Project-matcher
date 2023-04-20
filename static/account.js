@@ -4,50 +4,6 @@ let displayName = document.getElementById('displayName');
 let headerAccName = document.getElementById('headerAccName')
 let UserBioDisplay = document.getElementById('UserBioAccount');
 let userBioInput = document.getElementById('userBioInput');
-displayData()
-
-    function displayData(){
-
-        
-    saveChanges.addEventListener('click', function (event) {
-        event.preventDefault()
-    
-    
-        let localData = localStorage.getItem('userData');
-        let dataArr;
-        let userData;
-        if (userData == null) {
-            dataArr = [];
-        }
-        else {
-            dataArr = JSON.parse(userData);
-        }
-        let dataObb = {
-            displayName: displayName.value,
-            displayBio: userBioInput.value
-        }
-        dataArr.push(dataObb);
-        localStorage.setItem("userData", JSON.stringify(dataArr));
-        
-
-        dataArr.forEach(function(element){
-    
-            // function displayData(){
-            if(displayName.value != 0 && userBioInput.value != 0){
-                userNameAccount.innerText = `${element.displayName}`;
-                headerAccName.innerText = `${element.displayName}`;
-                UserBioAccount.innerText = `${element.displayBio}`;
-                // localStorage.setItem("userData", JSON.stringify(dataArr));
-            }
-            else{
-                confirm("Please Enter All Data")
-                // localStorage.setItem("userData", JSON.stringify(dataArr));
-            }
-        })
-    })
-}  
-
-
 
 // javaScript for Notification area
 

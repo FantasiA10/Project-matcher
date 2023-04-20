@@ -262,6 +262,18 @@ def account():
                                image_type=None)
 
 
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    user_email = session['user']['email']
+    sc.delete_user(user_email)
+ 
+    project_lst = module.homepage_form()
+    project_statistic = module.homepage_statistic()
+    return render_template('homepage.html',
+                           project_lst=project_lst,
+                           project_statistic=project_statistic)
+
+
 @app.route("/manager_homepage", methods=['GET', 'POST'])
 # @module.login_required
 def manager_homepage():
