@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/static/footer_style.css">
         <link rel="stylesheet" href="/static/forms.css">
 
-        <title>My Application</title>
+        <title>Applicants</title>
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
                 <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
@@ -28,16 +28,6 @@
     <br>
     </head>
     {% for message in get_flashed_messages() %}
-    <div class="mx-auto" style="width: 1200px;" class = "mt-5">
-    <div class="alert alert-light alert-dismissible fade show" role="alert" > 
-
-        <strong><small>{{message}}</small></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-    </div>
-    </div>
-    {% endfor %}
-
     <br/>
     <br/>  
 
@@ -45,7 +35,7 @@
     <body>
       <main class="table">
           <section class="table__header">
-              <h1><strong>My Applications</strong><small>(Here includes all applications you have submitted)</h1>
+              <h1><strong>Applicants</strong><small>(Here includes all applicants who applied to your projects)</h1>
           </section>
           
           <section class="table__body">
@@ -53,13 +43,12 @@
                   <thead>
                       <tr>                          
                           <th> Status
-                          <th> Applied Project
+                          <th> Applicant Name
                           <th> Applicant Email
                           <th> Applied Date
                           <th> Uploaded Resume
                           <th> Uploaded Transcript
-                          <th> Uploaded Coverletter   
-                          <th> Actions
+                          <th> Uploaded Coverletter
                       </tr>
                   </thead>
                   <tbody>
@@ -69,65 +58,16 @@
                             <td>
                                 <p class="status pending"><span class="badge">{{application_lst[i].application_status}}</span></p>
                             </td>
-                            <td><strong> {{application_lst[i].applied_project}} </strong></td>
+                            <td><strong> {{application_lst[i].applicant_email}} </strong></td>
                             <td> {{application_lst[i].applicant_email}} </td>
                             <td><strong> {{application_lst[i].application_date}} </strong></td>
                             <td> Upcoming soon </td>
                             <td> Upcoming soon </td>
                             <td> Upcoming soon </td>
-                            <td>
-                                <!-- Button trigger modal -->
-
-                                        <button type="button" class="btn btn-outline-light" data-aplname={{application_lst[i].application_name}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 120px">
-                                            Withdrawl
-                                        </button>
-
-                                        
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">Retrieve Application</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-
-                                                    <form action="{{ url_for('delete_apl', apl_name=application_lst[i].application_name)}}" method='post'>
-                                                        
-                                                        <div class="modal-body">
-                                                                Are you sure you want to WITHDRAWL this application? 
-                                                                Please note that you cannot redo this action.
-                                                        </div>
-                                                        <input type="hidden" id="apl_name" value="">
-                                                    
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                            <input type="submit" class="btn btn-outline-light" value="YES" />
-                                                            
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                            </td>
                         {%endfor%}
                   </tbody>
               </table>
           </section>
-
-
-        <script>
-            $('#delete').on('show.bs.modal', function (event) {
-                  var button = $(event.relatedTarget) 
-                  var apl_name = button.data('aplname') 
-                  var modal = $(this)
-                  modal.find('.modal-body #apl_name').val(apl_name);
-              })
-
-        </script>
-
       </main>
     </body>
   <br>
