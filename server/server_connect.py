@@ -38,7 +38,7 @@ USERS_NS = 'users'
 APPLICATIONS_NS = 'application'
 APPLICANT_NAME = 'applicant_name'
 APPLICANT_EMAIL = 'applicant_email'
-PROJECT = 'applied_project'
+PROJECT = 'project'
 APP_DATE = 'application_date'
 RESUME = 'resume'
 TRANSCRIPT = 'transcript'
@@ -81,6 +81,7 @@ APPLICATION_DETAILS = f'/{APPLICATIONS_NS}/{DETAILS}'
 APPLICATION_LIST = f'/{APPLICATIONS_NS}/{LIST}'
 APPLICATION_ADD = f'/{APPLICATIONS_NS}/{ADD}'
 APPLICATION_USER = f'/{APPLICATIONS_NS}/{USER}'
+APPLICATION_PROJECT = f'/{APPLICATIONS_NS}/{PROJECT}'
 APPLICATION_DELETE = f'/{APPLICATIONS_NS}/{DELETE}'
 
 """
@@ -388,6 +389,17 @@ def get_user_application(user_email):
     Get all applications of a user
     """
     response = requests.get(URL+APPLICATION_USER+f'/{user_email}')
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+
+    
+def get_project_application(project):
+    """
+    Get all applications of a project
+    """
+    response = requests.get(URL+APPLICATION_PROJECT+f'/{project}')
     if response.status_code == 200:
         return response.json()
     else:

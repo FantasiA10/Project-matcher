@@ -26,7 +26,7 @@
                 <a href="/user/signout" class="btn">Sign Out</a>
             </div>
  
-  </head>
+    </head>
             
     <br/>
     <br/>
@@ -44,9 +44,9 @@
                         <th> Status
                         <th> Project_Name
                         <th> Posted_Date
-                        <th> Intended_Majors
-                        <th> School_yr
-                        <th> Actions
+                        <th>
+                        <th> 
+                        <th>    
                     </tr>
                 </thead>
                 <tbody>
@@ -59,11 +59,14 @@
                               {{project_lst[i].name}}</a>
                           </strong></td>
                           <td><strong>  {{project_lst[i].post_date}} </strong> </td>
-                          <td> {{project_lst[i].major_requirements}} </td>
-                          <td> {{project_lst[i].school_year}} </td>
+                          <td>
+                            <a href="{{url_for('applicants', project = project_lst[i].name)}}" class="btn btn-outline-light mx-auto">Applicants</a>
+                          </td>
                           <td>
                             <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="btn btn-outline-light mx-auto">
-                                View</a>
+                                Detail</a>
+                          </td>
+                          <td>
                             <!-- Button trigger modal -->
                             <form action="{{ url_for('delete_pj', pj_name=project_lst[i].name)}}" method='post'>
                                 <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 120px">

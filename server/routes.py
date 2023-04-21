@@ -172,6 +172,19 @@ def my_application():
         return render_template('my_application.html', application_lst=application_lst)
 
 
+@app.route('/applicants/<project>]', methods=['GET', 'POST'])
+def applicants(project):
+    """
+    Return applicants of a single project
+    """
+    applicants_lst = sc.get_project_application(project)[project]
+        
+    if applicants_lst == []:
+        flash("Your project does not have any applicant yet.")
+    
+    return render_template('applicants.html', applicants_lst=applicants_lst)
+
+
 @app.route('/apply', methods=['GET', 'POST'])
 @module.login_required
 def apply():

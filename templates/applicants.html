@@ -28,6 +28,15 @@
     <br>
     </head>
     {% for message in get_flashed_messages() %}
+    <div class="mx-auto" style="width: 1200px;" class = "mt-5">
+    <div class="alert alert-light alert-dismissible fade show" role="alert" > 
+
+        <strong><small>{{message}}</small></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+    </div>
+    {% endfor %}
     <br/>
     <br/>  
 
@@ -35,7 +44,7 @@
     <body>
       <main class="table">
           <section class="table__header">
-              <h1><strong>Applicants</strong><small>(Here includes all applicants who applied to your projects)</h1>
+              <h1><strong>{{ applicants_lst[1].applied_project }}</strong><small>(Here includes all applicants who applied to your projects)</h1>
           </section>
           
           <section class="table__body">
@@ -53,14 +62,14 @@
                   </thead>
                   <tbody>
 
-                        {% for i in range(application_lst |length)%}
+                        {% for i in range(applicants_lst |length)%}
                         <tr>
                             <td>
-                                <p class="status pending"><span class="badge">{{application_lst[i].application_status}}</span></p>
+                                <p class="status pending"><span class="badge">{{applicants_lst[i].application_status}}</span></p>
                             </td>
-                            <td><strong> {{application_lst[i].applicant_email}} </strong></td>
-                            <td> {{application_lst[i].applicant_email}} </td>
-                            <td><strong> {{application_lst[i].application_date}} </strong></td>
+                            <td><strong> {{applicants_lst[i].applicant_name}} </strong></td>
+                            <td> {{applicants_lst[i].applicant_email}} </td>
+                            <td><strong> {{applicants_lst[i].application_date}} </strong></td>
                             <td> Upcoming soon </td>
                             <td> Upcoming soon </td>
                             <td> Upcoming soon </td>
