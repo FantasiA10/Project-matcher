@@ -55,14 +55,12 @@
                       {% for i in range(project_lst |length)%}
                       <tr>
                           <td>  <p class="status delivered"><span class="badge">APPROVED</span></p></td>
-                          <td><strong>  
+                          <td style="text-align: center;"><strong>  
                             <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
                               {{project_lst[i].name}}</a>
                           </strong></td>
                           <td><strong>  {{project_lst[i].post_date}} </strong> </td>
-                          <div>
-                          <div>
-                          <td> {{(applicants_lst |length)}} </td>
+                          <td style="text-align: center;"><strong>{{(applicants_lst |length)}} </strong></td>
                           <td>
                             <a href="{{url_for('applicants', project = project_lst[i].name)}}" class="btn btn-outline-light mx-auto">Applicants</a>
                           </td>
