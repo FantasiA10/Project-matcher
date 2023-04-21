@@ -152,8 +152,12 @@ def my_project():
     if session['logged_in'] == True:
         user_email = session['user']['email']
         project_lst = sc.get_user_project(user_email)[user_email]
-    
-        return render_template('my_project.html', project_lst=project_lst)
+
+        for project in project_lst:
+            name = project["name"]
+            applicants_lst = sc.get_project_application(name)[name]
+
+        return render_template('my_project.html', project_lst=project_lst, applicants_lst = applicants_lst)
 
 
 @app.route('/my_application', methods=['GET', 'POST'])
