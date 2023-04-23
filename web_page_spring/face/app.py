@@ -40,10 +40,19 @@ def login():
     if len(unknown_encoding) > 0:
         unknown_encoding = unknown_encoding[0]
 
+        # Find the best match for the unknown face
+        best_match = None
+        best_distance = 1.0
         for name, encoding in known_faces.items():
-            matches = face_recognition.compare_faces([encoding], unknown_encoding)
-            if True in matches:
-                return jsonify(success=True, name=name)
+            distance = face_recognition.face_distance([encoding], unknown_encoding)[0]
+            if distance < best_distance:
+                best_distance = distance
+                best_match = name
+
+        # Check if the best match is below the threshold
+        threshold = 0.6
+        if best_distance < threshold:
+            return jsonify(success=True, name=best_match)
 
     return jsonify(success=False)
 
@@ -57,6 +66,10 @@ def register_user():
     img_bytes = base64.b64decode(img_data)
     name = request.form['name']
 
+    # Check if the user already exists
+    if f'{name}.jpg' in known_faces:
+        return jsonify(success=False, message="User with this name already exists. Please choose a different name.")
+
     # Save the image to known_faces folder
     img_path = os.path.join(face_folder, f'{name}.jpg')
     with open(img_path, 'wb') as f:
@@ -66,9 +79,8 @@ def register_user():
     img = face_recognition.load_image_file(img_path)
     encodings = face_recognition.face_encodings(img)
     if len(encodings) > 0:
-        known_faces[name] = encodings[0]
+        known_faces[f'{name}.jpg'] = encodings[0]
 
     return jsonify(success=True)
-
 if __name__ == '__main__':
     app.run(debug=True)

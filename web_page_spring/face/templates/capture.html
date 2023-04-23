@@ -4,36 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <style>
-        #preview {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <img id="preview" src="#" alt="captured image preview">
-    <form id="captureForm" method="post" action="{{ action }}">
-        <input type="hidden" id="image" name="image">
-        {% if title == 'Register' %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <video id="video" width="640" height="480" autoplay></video>
+        <!-- <button id="snap">Snap Photo</button> -->
+        <canvas id="canvas" width="640" height="480"></canvas>
+        <img id="preview" src="#" alt="captured image preview">
+        <form id="captureForm" method="post" action="{{ action }}">
+            <input type="hidden" id="image" name="image">
+            {% if title == 'Register' %}
+            <br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            {% endif %}
+            <br>
+            <input type="submit" value="{{ title }}" id="submit">
+        </form>
         <br>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        {% endif %}
-        <br>
-        <input type="submit" value="{{ title }}" id="submit">
-    </form>
-    <br>
-    <div>
-        <a href="/login_page">Go to Login</a> |
-        <a href="/register">Go to Register</a>
+        <div>
+            <a href="/login_page">Go to Login</a> |
+            <a href="/register">Go to Register</a>
+        </div>
+        <!-- Include your capture.js file -->
+        <script src="/static/capture.js"></script>
     </div>
-    <!-- Include your capture.js file -->
-    <script src="/static/capture.js"></script>
 </body>
 </html>
