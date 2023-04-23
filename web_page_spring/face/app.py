@@ -20,6 +20,10 @@ for filename in os.listdir(face_folder):
 
 @app.route('/')
 def index():
+    return render_template('capture.html', title='Register', action='/register_user')
+
+@app.route('/login_page')
+def login_page():
     return render_template('capture.html', title='Login', action='/login')
 
 @app.route('/login', methods=['POST'])
@@ -45,7 +49,7 @@ def login():
 
 @app.route('/register')
 def register():
-    return render_template('capture.html', title='Register', action='/register')
+    return render_template('capture.html', title='Register', action='/register_user')
 
 @app.route('/register_user', methods=['POST'])
 def register_user():
