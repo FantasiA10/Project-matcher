@@ -52,6 +52,7 @@ def login():
         # Check if the best match is below the threshold
         threshold = 0.6
         if best_distance < threshold:
+            name = os.path.splitext(best_match)[0]
             return jsonify(success=True, name=best_match)
 
     return jsonify(success=False)
@@ -79,8 +80,16 @@ def register_user():
     img = face_recognition.load_image_file(img_path)
     encodings = face_recognition.face_encodings(img)
     if len(encodings) > 0:
-        known_faces[f'{name}.jpg'] = encodings[0]
+        if name not in known_faces:
+            # Use os.path.splitext to remove file extension from name
+            name_without_extension = os.path.splitext(name)[0]
+            known_faces[name_without_extension] = encodings[0]
+            return jsonify(success=True)
+        else:
+            return jsonify(success=False, error_message="Username already exists. Please choose another.")
+    else:
+        return jsonify(success=False, error_message="Face not recognized. Please try again.")
 
-    return jsonify(success=True)
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,7 +1,7 @@
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
-const preview = document.getElementById("preview");
+// const preview = document.getElementById("preview");
 const imageInput = document.getElementById("image");
 
 navigator.mediaDevices
@@ -20,7 +20,7 @@ captureForm.addEventListener("submit", async (event) => {
   // Take a snapshot and set the image input value
   context.drawImage(video, 0, 0, 640, 480);
   const dataURL = canvas.toDataURL("image/jpeg");
-  preview.src = dataURL;
+//   preview.src = dataURL;
   imageInput.value = dataURL;
 
   // Perform the login or registration
@@ -32,12 +32,13 @@ captureForm.addEventListener("submit", async (event) => {
 
   const data = await response.json();
   if (data.success) {
-    if (captureForm.action.includes("login")) {
-      alert(`Login successful! Welcome, ${data.name}`);
+    if (captureForm.action.includes('login')) {
+        alert(`Login successful! Welcome, ${data.name}`);
     } else {
-      alert("Registration successful!");
+        alert('Registration successful!');
     }
-  } else {
-    alert("Face not recognized. Please try again.");
-  }
+} else {
+    alert(data.message || data.error_message || 'Face not recognized. Please try again.');
+}
+
 });
