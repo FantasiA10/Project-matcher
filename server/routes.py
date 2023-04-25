@@ -5,6 +5,8 @@ import datetime
 from server.user_login import User
 import server.server_connect as sc
 import server.module as module
+import base64
+import io
 
 
 app = Flask(__name__, template_folder="../templates")
@@ -211,15 +213,13 @@ def apply():
             'applicant_email': session['user']["email"],
             'applied_project': request.form['applied project'],
             'application_date': datetime.datetime.today().strftime("%m-%d-%Y"),
-            'transcript': "string",
-            'resume': "string",
             'application_status': "Pending",
             'resume_filename': resume_file.filename if resume_file else None,
-            'resume_content': resume_file.read() if resume_file else None,
+            'resume_content': base64.b64encode(resume_file.read()).decode('utf-8') if resume_file else None,
             'transcript_filename': transcript_file.filename if transcript_file else None,
-            'transcript_content': transcript_file.read() if transcript_file else None,
+            'transcript_content': base64.b64encode(transcript_file.read()).decode('utf-8') if transcript_file else None,
             'coverletter_filename': coverletter_file.filename if coverletter_file else None,
-            'coverletter_content': coverletter_file.read() if coverletter_file else None
+            'coverletter_content': base64.b64encode(coverletter_file.read()).decode('utf-8') if coverletter_file else None,
         }
         if (sc.application_exist(apl_name)):
             flash("Error: You have already applied for this project.", "danger")
@@ -283,15 +283,15 @@ def account():
         return render_template('accountpage.html', title='Account',
                                image_file=pic_data,
                                image_type=pic_type,
-                               name = name,
-                               phone = phone)
+                               name=name,
+                               phone=phone)
     else:
         image_file = url_for('static', filename='images/' + 'steven.jpg')
         return render_template('accountpage.html', title='Account',
                                image_file=image_file,
                                image_type=None,
-                               name = name,
-                               phone = phone)
+                               name=name,
+                               phone=phone)
 
 
 @app.route('/delete_user', methods=['POST'])

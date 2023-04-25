@@ -410,6 +410,7 @@ def add_application(details):
     """
     send application to server
     """
+    print(details)
     response = requests.post(URL+APPLICATION_ADD, json=details)
     if response.status_code == 200:
         return response.json()
