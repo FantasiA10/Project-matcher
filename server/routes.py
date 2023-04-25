@@ -123,7 +123,13 @@ def delete_pj(pj_name):
 
     user_email = session['user']['email']
     project_lst = sc.get_user_project(user_email)[user_email]
-    return render_template('my_project.html', project_lst=project_lst)
+    applicants_lst = []
+
+    for i in range(len(project_lst)):
+        name = project_lst[i]["name"]
+        applicants_lst.append(sc.get_project_application(name)[name])
+                
+    return render_template('my_project.html', project_lst=project_lst, applicants_lst = applicants_lst)
 
 
 @app.route('/single_post/<project>', methods=['GET', 'POST'])
@@ -154,11 +160,12 @@ def my_project():
     if session['logged_in'] == True:
         user_email = session['user']['email']
         project_lst = sc.get_user_project(user_email)[user_email]
+        applicants_lst = []
 
-        for project in project_lst:
-            name = project["name"]
-            applicants_lst = sc.get_project_application(name)[name]
-
+        for i in range(len(project_lst)):
+            name = project_lst[i]["name"]
+            applicants_lst.append(sc.get_project_application(name)[name])
+                
         return render_template('my_project.html', project_lst=project_lst, applicants_lst = applicants_lst)
 
 
@@ -188,7 +195,7 @@ def applicants(project):
     if applicants_lst == []:
         flash("Your project does not have any applicant yet.")
     
-    return render_template('applicants.html', applicants_lst=applicants_lst)
+    return render_template('applicants.html',project = project, applicants_lst=applicants_lst)
 
 
 @app.route('/apply', methods=['GET', 'POST'])

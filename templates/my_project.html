@@ -60,7 +60,7 @@
                               {{project_lst[i].name}}</a>
                           </strong></td>
                           <td><strong>  {{project_lst[i].post_date}} </strong> </td>
-                          <td style="text-align: center;"><strong>{{(applicants_lst |length)}} </strong></td>
+                          <td style="text-align: center;"><strong>{{(applicants_lst[i] |length)}} </strong></td>
                           <td>
                             <a href="{{url_for('applicants', project = project_lst[i].name)}}" class="btn btn-outline-light mx-auto">Applicants</a>
                           </td>
