@@ -73,6 +73,11 @@ def register_user():
 
     # Save the image to known_faces folder
     img_path = os.path.join(face_folder, f'{name}.jpg')
+
+    # Check if the file with the same name already exists in the folder
+    if os.path.exists(img_path):
+        return jsonify(success=False, message="User with this name already exists. Please choose a different name.")
+
     with open(img_path, 'wb') as f:
         f.write(img_bytes)
 
@@ -89,6 +94,7 @@ def register_user():
             return jsonify(success=False, error_message="Username already exists. Please choose another.")
     else:
         return jsonify(success=False, error_message="Face not recognized. Please try again.")
+
 
 
 if __name__ == '__main__':
