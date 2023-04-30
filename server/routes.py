@@ -198,6 +198,14 @@ def applicants(project):
     return render_template('applicants.html',project = project, applicants_lst=applicants_lst)
 
 
+@app.route('/downloadApplicationInfo/<project>/<applicant_email>/<field>', methods=['GET', 'POST'])
+def downloadApplicationInfo(project):
+    """
+    Download description file
+    """
+    return sc.get_file(project)
+
+
 @app.route('/apply', methods=['GET', 'POST'])
 @module.login_required
 def apply():
