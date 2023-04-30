@@ -88,14 +88,11 @@
                 </option>
                     {% endfor %}
             </select>
-
-            <label for="member need">No. of Member Needed</label>
-            <input type="number" name="member number" class="field" required >
     
             <label for="major">Intended Majors</label>
             <input type="major" name="major" class="field" required>
             
-            <label for="school year">School Year Requirement</label>
+            <label for="school year">Preferrable School Year</label>
             <select name="school year" class="field" required>
               <option value="" disabled selected hidden>Select a field</option>
               <option value="Sophomore or above">Sophomore or above</option>
@@ -106,7 +103,7 @@
               <option value="No restrictions">No restrictions</option>
             </select>
 
-            <label for="gpa">GPA Requirment</label>
+            <label for="gpa">Minimum GPA</label>
             <select name="gpa" class="field" required>
               <option value="" disabled selected hidden>Select a field</option>
               <option value="3.7 or above">3.7 or above</option>
@@ -116,16 +113,19 @@
               <option value="No restrictions">No restrictions</option>
             </select>
 
-            <label for="length">Project Length (e.g. 3 months)</label>
-            <input type="length" name="length" class="field" required>
-
-            <label for="skill">Skill Requirment (Please list preferable skill sets)</label>
+            <label for="skill">Preferable Skillsets</label>
             <input type="skill" name="skill" class="field">
 
-            <label for="description">Describe your project</label>
+            <label for="member need">Number of Students Needed</label>
+            <input type="number" name="member number" class="field" required >
+
+            <label for="length">Project Duration (e.g. 3 months)</label>
+            <input type="length" name="length" class="field" required>
+
+            <label for="description">Project Description</label>
             <input style="height:200px;" type="description" name="description" class="field"s>
 
-            <label for="FS">Upload File (should be smaller than 5 MB) </label>
+            <label for="FS">Relevant File (should be smaller than 5 MB) </label>
             <input type="file" name='file' id="file" class="field"/>
     
             <input type="submit" value="Submit" class="btn">
