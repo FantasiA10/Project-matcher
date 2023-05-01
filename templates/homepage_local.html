@@ -12,14 +12,14 @@
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/word_animation.css">
         <title>Home</title>
-            <div id="transparentheader">
+            <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
                 <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
                 <a href="{{url_for('my_application') }}" class="btn">My Applications</a>
                 <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
                 <a href="{{url_for('apply') }}" class="btn">Apply</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
-                <a href="{{url_for('signout')}}" class="round-button">Sign Out</a>
+                <a href="{{url_for('signout')}}" class="btn">Sign Out</a>
             </div>
     </head>
     <body>
