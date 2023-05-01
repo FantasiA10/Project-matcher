@@ -1,27 +1,30 @@
 body {
-    font-family: "Arial", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #57068c;
     color: #fff;
     margin: 0;
     padding: 0;
   }
-
-h1 {
+  
+  h1 {
     color: #333;
-}
-
-video {
+  }
+  
+  video {
     border: 1px solid #ccc;
     margin-bottom: 10px;
-}
-
-canvas,
-img {
+    border-radius: 12px;
+  }
+  
+  canvas,
+  img {
     display: none;
-}
-
-button {
-    background-color: #4CAF50;
+  }
+  
+  button,
+  input[type="submit"],
+  .nav-btn {
+    background-color: #007aff;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -31,83 +34,52 @@ button {
     font-size: 16px;
     margin: 10px 2px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-form {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  button:hover,
+  input[type="submit"]:hover,
+  .nav-btn:hover {
+    background-color: #0059b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08);
+    color: white;
+    transform: scale(1.05); /* 添加放大效果 */
+  }
+  
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-input[type="text"] {
+  }
+  
+  input[type="text"] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 2px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-
-.container {
+    border-radius: 12px;
+  }
+  
+  .container {
     width: 100%;
     max-width: 640px;
     margin: 5% auto;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: 12px;
   }
   
-
-a {
+  a {
     color: #4CAF50;
     text-decoration: none;
-}
-
-a:hover {
-    color: #45a049;
-    text-decoration: underline;
-}
-
-
-.nav-btn {
-    background-color: #333;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
   }
   
-  .nav-btn:hover {
-    background-color: #555;
+  a:hover {
+    color: #45a049;
+    text-decoration: underline;
   }
   
