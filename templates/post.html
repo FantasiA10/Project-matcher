@@ -19,9 +19,9 @@
         <title>Home</title>
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-                <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
-                <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
-                <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
                 <a href="{{url_for('apply') }}" class="btn">Apply</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
                 <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
@@ -54,35 +54,35 @@
                         <th >{{ project.department_name }}</th>
                     </tr>
                     <tr>
-                        <th scope="row">Number of Member Needed:</th>
+                        <th scope="row">Number of Members Needed:</th>
                         <th>{{ project.num_members }}</th>
                     </tr>
                     <tr>
-                        <th scope="row">Intened Majors</th>
+                        <th scope="row">Intended Majors:</th>
                         <th>{{ project.major_requirements }}</th>
                     </tr>
                     <tr>
-                        <th scope="row">Minimum School Year Required</th>
+                        <th scope="row">Minimum School Year Required:</th>
                         <th>{{ project.school_year }}</th>
                     </tr>
                     <tr>
-                        <th scope="row">Minimum GPA Required</th>
+                        <th scope="row">Minimum GPA Required:</th>
                         <th>{{ project.GPA }}</th>
 
                     <tr>
-                        <th scope="row">Project Status</th>
+                        <th scope="row">Project Status:</th>
                         <th><span class="badge badge-success">OPEN</span></th>
                     </tr>
 
                     </tr>
                     <tr>
-                        <th scope="row">Project duration</th>
+                        <th scope="row">Project duration:</th>
                         <th>{{ project.project_duration}}</th>
                     </tr>
 
                     
                     <tr>
-                        <th scope="row">Sponsor / Project Leader </th>
+                        <th scope="row">Sponsor / Project Leader:</th>
                         <th>{{ project.account.name}} 
                         </br>
                         <a href="#" style="color: #57068c;"> {{ project.account.email}} </a> </th>
@@ -105,7 +105,7 @@
 
                 <div class="card border-light mb-3" style="height:200px; width:400px" >
                     <div class="card-header" style="background-color: #57068c; color:white">
-                        <a class="card-title">File Uploaded</a></div>
+                        <a class="card-title">File(s) Uploaded</a></div>
                     <div class="card-body">
                         <ul class="list-unstyled">
                             {% if filename %}

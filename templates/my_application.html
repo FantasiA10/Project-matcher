@@ -18,9 +18,9 @@
         <title>My Application</title>
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-                <a href="{{url_for('my_project') }}" class="btn">My_Projects</a>
-                <a href="{{url_for('my_application') }}" class="btn">My_Applications</a>
-                <a href="{{url_for('add_project') }}" class="btn">Add_Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+                <a href="{{url_for('my_application') }}" class="btn">My Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
                 <a href="{{url_for('apply') }}" class="btn">Apply</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
                 <a href="/user/signout" class="btn">Sign Out</a>
@@ -56,10 +56,10 @@
                           <th> Applied Project
                           <th> Applicant Email
                           <th> Applied Date
-                          <th> Uploaded Resume
-                          <th> Uploaded Transcript
-                          <th> Uploaded Cover Letter   
-                          <th> Actions
+                          <th> Resume
+                          <th> Transcript
+                          <th> Cover Letter   
+                          <th>
                       </tr>
                   </thead>
                   <tbody>
@@ -69,12 +69,27 @@
                             <td>
                                 <p class="status pending"><span class="badge">{{application_lst[i].application_status}}</span></p>
                             </td>
-                            <td><strong> {{application_lst[i].applied_project}} </strong></td>
+                            <td style="text-align: center;"><strong>  
+                                <a href="{{url_for('single_post', project = application_lst[i].applied_project)}}" style="color:#57068c; text-decoration:none">
+                                  {{application_lst[i].applied_project}}</a>
+                              </strong></td>
                             <td> {{application_lst[i].applicant_email}} </td>
                             <td><strong> {{application_lst[i].application_date}} </strong></td>
-                            <td> Upcoming soon </td>
-                            <td> Upcoming soon </td>
-                            <td> Upcoming soon </td>
+                            {%if application_lst[i].resume_filename is defined%}
+                                <td> <a href="{{url_for('downloadApplicationInfo', project = application_lst[i].applied_project, applicant_email=application_lst[i].applicant_email, field='resume')}}" style="color:#57068c;">{{application_lst[i].resume_filename}}</td>
+                            {%else%}
+                                <td> no submission</td>
+                            {%endif%}
+                            {%if application_lst[i].transcript_filename is defined%}
+                                <td> <a href="{{url_for('downloadApplicationInfo', project = application_lst[i].applied_project, applicant_email=application_lst[i].applicant_email, field='transcript')}}" style="color:#57068c;">{{application_lst[i].transcript_filename}}</td>
+                            {%else%}
+                                <td> no submission</td>
+                            {%endif%}
+                            {%if application_lst[i].coverletter_filename is defined%}
+                                <td> <a href="{{url_for('downloadApplicationInfo', project = application_lst[i].applied_project, applicant_email=application_lst[i].applicant_email, field='coverletter')}}" style="color:#57068c;">{{application_lst[i].coverletter_filename}}</td>
+                            {%else%}
+                                <td> no submission</td>
+                            {%endif%}
                             <td>
                                 <form action="{{ url_for('delete_apl', apl_name=application_lst[i].application_name)}}" method='post'>
                                     <input type="submit" class="btn btn-outline-light" style="width: 120px" value="DELETE">
@@ -131,7 +146,6 @@
             </a></li>
         </ul>
         <ul class="menu">
-        <li class="menu__item"><a class="menu__link" href="/homepage">Home</a></li>
         <li class="menu__item"><a class="menu__link" href="/about_us">About</a></li>
         <li class="menu__item"><a class="menu__link" href="/service">Services</a></li>
         <li class="menu__item"><a class="menu__link" href="/team">Team</a></li>
