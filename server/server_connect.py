@@ -406,6 +406,44 @@ def get_project_application(project):
         print(f"Request failed with status code {response.status_code}")
 
 
+def get_project_application_file(project, applicant_email, field):
+    """
+    get application resume, coverletter, transcript based on request
+    """
+    response = requests.get(URL+APPLICATION_PROJECT+f'/{project}')
+    if response.status_code == 200:
+        application_lst = response.json()[project]
+        for sub_dict in application_lst:
+            if sub_dict['applicant_email'] == applicant_email:
+                if field == 'resume':
+                    file_mimetype, encoding  = mimetypes.guess_type('resume_filename')
+                    file_data = io.BytesIO(sub_dict['resume_content'].encode())
+                    return send_file(file_data,
+                                     as_attachment=True,
+                                     attachment_filename=sub_dict['resume_filename'],
+                                     mimetype=file_mimetype
+                                     )
+                elif field == 'transcript':
+                    file_mimetype, encoding  = mimetypes.guess_type('transcript_filename')
+                    file_data = io.BytesIO(sub_dict['transcript_content'].encode())
+                    return send_file(file_data,
+                                     as_attachment=True,
+                                     attachment_filename=sub_dict['transcript_filename'],
+                                     mimetype=file_mimetype
+                                     )
+                elif field == 'coverletter':
+                    file_mimetype, encoding  = mimetypes.guess_type('coverletter_filename')
+                    file_data = io.BytesIO(sub_dict['coverletter_content'].encode())
+                    return send_file(file_data,
+                                     as_attachment=True,
+                                     attachment_filename=sub_dict['coverletter_filename'],
+                                     mimetype=file_mimetype
+                                     )
+    return None
+
+        
+
+
 def add_application(details):
     """
     send application to server

@@ -185,7 +185,7 @@ def my_application():
         return render_template('my_application.html', application_lst=application_lst)
 
 
-@app.route('/applicants/<project>]', methods=['GET', 'POST'])
+@app.route('/applicants/<project>', methods=['GET', 'POST'])
 def applicants(project):
     """
     Return applicants of a single project
@@ -195,15 +195,15 @@ def applicants(project):
     if applicants_lst == []:
         flash("Your project does not have any applicant yet.")
     
-    return render_template('applicants.html',project = project, applicants_lst=applicants_lst)
+    return render_template('applicants.html',project=project, applicants_lst=applicants_lst)
 
 
 @app.route('/downloadApplicationInfo/<project>/<applicant_email>/<field>', methods=['GET', 'POST'])
-def downloadApplicationInfo(project):
+def downloadApplicationInfo(project, applicant_email, field):
     """
     Download description file
     """
-    return sc.get_file(project)
+    return sc.get_project_application_file(project, applicant_email, field)
 
 
 @app.route('/apply', methods=['GET', 'POST'])
