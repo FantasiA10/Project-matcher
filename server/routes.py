@@ -283,6 +283,14 @@ def get_css_file(css_file):
     return send_file(file_name)
 
 
+@app.route("/google5ace17af1b960825.html")
+def google_site_verf():
+    """
+    google varification
+    """
+    return render_template("google5ace17af1b960825.html")
+
+
 @app.route("/account", methods=['GET', 'POST'])
 @module.login_required
 def account():
