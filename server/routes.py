@@ -283,7 +283,7 @@ def get_css_file(css_file):
     return send_file(file_name)
 
 
-@app.route("/google5ace17af1b960825.html")
+@app.route("/google5ace17af1b960825.html", methods=['GET'])
 def google_site_verf():
     """
     google varification
