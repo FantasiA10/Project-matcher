@@ -74,28 +74,28 @@
                                 {%if applicants_lst[i].resume_filename is not none%}
                                     <td> <a href="{{url_for('downloadApplicationInfo', project = applicants_lst[i].applied_project, applicant_email=applicants_lst[i].applicant_email, field='resume')}}" style="color:#57068c;">{{applicants_lst[i].resume_filename}}</td>
                                 {%else%}
-                                        <td> no submission</td>
+                                        <td> No Submission</td>
                                 {%endif%}
                             {%else%}
-                                <td> no submission</td>
+                                <td> No Submission</td>
                             {%endif%}
                             {%if applicants_lst[i].transcript_filename is defined%}
                                 {%if applicants_lst[i].transcript_filename is not none%}
                                     <td> <a href="{{url_for('downloadApplicationInfo', project = applicants_lst[i].applied_project, applicant_email=applicants_lst[i].applicant_email, field='transcript')}}" style="color:#57068c;">{{applicants_lst[i].transcript_filename}}</td>
                                 {%else%}
-                                    <td> no submission</td>
+                                    <td> No Submission</td>
                                 {%endif%}
                             {%else%}
-                                <td> no submission</td>
+                                <td> No Submission</td>
                             {%endif%}
                             {%if applicants_lst[i].coverletter_filename is defined%}
                                 {%if applicants_lst[i].coverletter_filename is not none%}
                                     <td> <a href="{{url_for('downloadApplicationInfo', project = applicants_lst[i].applied_project, applicant_email=applicants_lst[i].applicant_email, field='coverletter')}}" style="color:#57068c;">{{applicants_lst[i].coverletter_filename}}</td>
                                 {%else%}
-                                    <td> no submission</td>
+                                    <td> No Submission</td>
                                 {%endif%}
                             {%else%}
-                                <td> no submission</td>
+                                <td> No Submission</td>
                             {%endif%}
                         {%endfor%}
                   </tbody>
