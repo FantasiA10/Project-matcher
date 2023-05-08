@@ -3,6 +3,7 @@ from flask import send_file
 import mimetypes
 import io
 import base64
+import os
 
 LIST = 'list'
 DICT = 'dict'
@@ -47,7 +48,7 @@ DEPART = 'departments'
 PROFILE = 'profile'
 UPDATE = 'update'
 
-
+URL = os.environ.get('URL')
 URL = "https://project-finder.herokuapp.com/"
 
 PROJECT_KEY = 'name'
