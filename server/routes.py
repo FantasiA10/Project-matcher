@@ -261,8 +261,9 @@ def homepage_search():
     todo
     """
     key_word = request.form['key_word']
+    project_statistic = module.homepage_statistic()
     project_lst = module.homepage_form(key_word)
-    return render_template('homepage.html', project_lst=project_lst)
+    return render_template('homepage.html', project_lst=project_lst, project_statistic=project_statistic)
 
 
 @app.route('/static/images/<file_name>', methods=['GET'])
