@@ -51,6 +51,7 @@ h1 {
 
 body {
   color: var(--black);
+
 }
 
 .info {
@@ -239,11 +240,19 @@ body {
         box-sizing: border-box;
       }
   
-  main {
+  /* main {
     padding: 30px;
     box-sizing: border-box;
-  }
+  } */
 
+  main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 60px;
+    box-sizing: border-box;
+  }
+  
   .table-striped>tbody>tr:nth-child(odd)>th {
       background-color: #f1e5fc;
   }

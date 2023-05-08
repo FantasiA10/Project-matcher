@@ -3,7 +3,7 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, , maximum-scale=1, user-scalable=no" name="viewport">
 
         <!-- Our CSS -->
         <link rel="stylesheet" href="/static/forms.css">
@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/static/footer_style.css">
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/word_animation.css">
+
         <title>Home</title>
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
@@ -21,38 +22,48 @@
                 <a href="{{url_for('account') }}" class="btn">Account</a>
                 <a href="{{url_for('loginpage')}}" class="btn">login</a>
             </div>
+        
+        <!-- inline css for the project box -->
         <style>
-        /* Inline CSS for the project boxes */
             .form {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-between;
             }
 
             .form-box {
-                display: inline-block;
-                flex-direction: column;
+                display: flex;
+                flex-direction: row;
                 align-items: center;
-                justify-content: center;
-                border: 3px solid #57068c;
+                border: 1px solid #ccc;
                 padding: 20px;
-                height: 300px;
-                margin: 10px;
-                flex-grow: 1;
-                max-width: 300px;
+                height: 200px;
+                width: 300px;
+                box-sizing: border-box;
                 border-radius: 10px;
+                margin-bottom: 20px; /* Add some space between rows */
             }
 
             .form-image {
-                width: 150px;
-                height: 150px;
+                width: 100px;
+                height: 100px;
+                margin-right: 20px;
             }
 
             .form-label {
                 font-weight: bold;
                 margin-bottom: 5px;
             }
+
+            .form-input {
+                width: 100%;
+                padding: 5px;
+                font-size: 16px;
+                text-align: left;
+            }
+
         </style>
+
     </head>
     <body>
         <div>
@@ -117,7 +128,7 @@
         </div>
     <br><br><br>
 
-    <table-opacity>
+
       <main>
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
@@ -127,81 +138,32 @@
               </form>
           </section>
 
-          <!-- <section class="table__body"> -->
-              <!-- <table> -->
-                  <!-- <thead>
-                      <tr>
-                          <th> ID
-                          <th> Project Name
-                          <th> 
-                          <th> Sponsor
-                          <th> Department
-                          <th> Project Status
-                          <th> Posted Date
-                          <th> 
-                      </tr>
-                  </thead> -->
-
-                  {% for i in range(project_lst |length)%}
-                  <tr>
-                        <div class="form">
-                            <div class="form-box">
-                                <!-- <td> {{i+1}} </td> -->
-                                <img class="form-image" src="https://via.placeholder.com/100">
-                                <div>
-                                    
-                                    <lable style = "color:#57068c;"class="form-label" href="{{url_for('single_post', project = project_lst[i].name)}}" >
-                                        {{project_lst[i].name}}
-                                    </lable><br>
-                                    <lable class="form-label"> {{project_lst[i].account.name}} </lable><br>
-                                    <lable class="form-label"> {{project_lst[i].department_name}} </lable><br>
-                                    <t>
-                                    <p class="status delivered">OPEN</p>
-                                    </td>
-                                    <lable class="form-label"> Post Date:</lable>
-                                    <lable class="form-label"> {{project_lst[i].post_date}}</lable><br>
-                                    <lable>
-                                        <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="form-label">
-                                            View More</a>
-                                    </lable>
-                                </div>
-        
-                            </div>
-                        </div>
-                    {%endfor%}
-                    </tr>
-                    
-                  <!-- <tbody>
-                        {% for i in range(project_lst |length)%}
-                        <tr>
-                            <td> {{i+1}} </td>
-
-                            <td><strong>
-                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
-                                {{project_lst[i].name}}</a>
-                            </strong></td>
+            <div class="form">
+                {% for i in range(project_lst |length)%}
+                    <div class="form-box">
+                        <img class="form-image" src="https://via.placeholder.com/100">
+                        <div>
                             
-
-                            <td> <img src="static/images/steven.jpg" alt=""> </td>
-                            <td> {{project_lst[i].account.name}} </td>
-                            <td> {{project_lst[i].department_name}} </td>
-                            <td>
+                            <lable style = "color:#57068c;"class="form-label" href="{{url_for('single_post', project = project_lst[i].name)}}" >
+                                {{project_lst[i].name}}
+                            </lable><br>
+                            <lable class="form-label"> {{project_lst[i].account.name}} </lable><br>
+                            <lable class="form-label"> {{project_lst[i].department_name}} </lable><br>
+                            <t>
                             <p class="status delivered">OPEN</p>
                             </td>
-                            <td> {{project_lst[i].post_date}}</td>
-
-
-                            <td>
-                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c; text-decoration:none">
+                            <lable class="form-label"> Post Date:</lable>
+                            <lable class="form-label"> {{project_lst[i].post_date}}</lable><br>
+                            <lable>
+                                <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="form-label">
                                     View More</a>
-                                </td>
-                        {%endfor%}
-                        </tr>
-                  </tbody> -->
-              <!-- </table> -->
-          <!-- </section> -->
+                            </lable>
+                        </div>
+                    </div>    
+                {%endfor%}
+            </div>          
       </main>
-    </table-opacity>
+
   </body>
   <br>
   <br>
