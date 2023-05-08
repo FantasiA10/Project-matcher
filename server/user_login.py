@@ -61,10 +61,12 @@ class User:
         """
         if sc.user_exists(user_email):
             """ Log the user in """
-            sc.user_login(user_field)
-            user = sc.get_user_details(user_email)
-            return self.start_session(user)
-
+            if sc.user_login(user_field) == 200:
+                sc.user_login(user_field)
+                user = sc.get_user_details(user_email)
+                return self.start_session(user)
+            else:
+                return jsonify({"error": "Invalid login credentials"}), 401
         else:
             return jsonify({"error": "Account not exists"}), 401
 

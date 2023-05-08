@@ -117,10 +117,7 @@ def get_user_details(user):
 
 def user_login(details):
     response = requests.post(URL+USER_LOGIN, json=details)
-    if response.status_code == 200:
-        return {MESSAGE: 'User loged in.'}
-    else:
-        print(f"Request failed with status code {response.status_code}")
+    return response.status_code
 
 
 def user_signup(details):
